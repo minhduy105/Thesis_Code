@@ -1,6 +1,4 @@
 import numpy as np
-from os import listdir, walk
-from os.path import isfile, join, splitext
 import AnalysisTool as AT
 
 if __name__ == "__main__":

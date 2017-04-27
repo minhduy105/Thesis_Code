@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<tt xmlns="http://www.w3.org/ns/ttml" xmlns:ttp="http://www.w3.org/ns/ttml#parameter" ttp:dropMode="nonDrop" ttp:frameRate="30" ttp:frameRateMultiplier="1000 1001" ttp:timeBase="smpte" xmlns:m608="http://www.smpte-ra.org/schemas/2052-1/2010/smpte-tt#cea608" xmlns:smpte="http://www.smpte-ra.org/schemas/2052-1/2010/smpte-tt" xmlns:ttm="http://www.w3.org/ns/ttml#metadata" xmlns:tts="http://www.w3.org/ns/ttml#styling">
+
+  <head>
+    <styling>
+      <style tts:color="white" tts:fontFamily="monospace" tts:fontWeight="normal" tts:textAlign="left" xml:id="basic"/>
+    </styling>
+    <layout>
+      <region tts:backgroundColor="transparent" xml:id="pop1"/>
+      <region tts:backgroundColor="transparent" xml:id="paint"/>
+      <region tts:backgroundColor="transparent" xml:id="rollup2"/>
+      <region tts:backgroundColor="transparent" xml:id="rollup3"/>
+      <region tts:backgroundColor="transparent" xml:id="rollup4"/>
+    </layout>
+    <metadata/>
+    <smpte:information m608:captionService="F1C1CC" m608:channel="cc1"/>
+  </head>
+
+  <body>
+    <div>
+      <p begin="00:00:05:01" end="00:00:06:23" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:06:23" end="00:00:10:05" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:10:05" end="00:00:10:16" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:10:16" end="00:00:17:05" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:17:05" end="00:00:17:20" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:17:20" end="00:00:22:05" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:22:05" end="00:00:22:22" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:22:22" end="00:00:24:09" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:24:09" end="00:00:28:03" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:28:03" end="00:00:32:23" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:32:23" end="00:00:33:08" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:33:08" end="00:00:35:18" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:35:18" end="00:00:36:03" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:36:03" end="00:00:36:22" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:36:22" end="00:00:37:18" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:37:18" end="00:00:44:08" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:44:08" end="00:00:47:27" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:47:27" end="00:00:49:08" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:49:08" end="00:00:49:27" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:49:27" end="00:00:51:25" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:51:25" end="00:00:52:02" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:52:02" end="00:00:54:12" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:54:12" end="00:00:56:08" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:00:56:08" end="00:01:10:09" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:10:09" end="00:01:11:10" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:11:10" end="00:01:11:20" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:11:20" end="00:01:22:02" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:22:02" end="00:01:26:21" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:26:21" end="00:01:29:05" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:29:05" end="00:01:34:27" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:34:27" end="00:01:40:11" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:40:11" end="00:01:41:20" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:41:20" end="00:01:50:14" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:50:14" end="00:01:54:10" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:54:10" end="00:01:57:24" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:57:24" end="00:01:58:17" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:01:58:17" end="00:02:09:01" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:09:01" end="00:02:13:25" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:13:25" end="00:02:14:15" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:14:15" end="00:02:17:13" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:17:13" end="00:02:18:16" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:18:16" end="00:02:19:17" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:19:17" end="00:02:22:08" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:22:08" end="00:02:22:24" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:22:24" end="00:02:23:12" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:23:12" end="00:02:24:21" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:24:21" end="00:02:25:24" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:25:24" end="00:02:27:23" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:27:23" end="00:02:31:14" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:31:14" end="00:02:32:29" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:32:29" end="00:02:35:02" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:35:02" end="00:02:42:29" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:42:29" end="00:02:48:15" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:48:15" end="00:02:50:14" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:50:14" end="00:02:50:25" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:50:25" end="00:02:56:14" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:56:14" end="00:02:57:00" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:57:00" end="00:02:58:00" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:02:58:00" end="00:03:00:24" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:00:24" end="00:03:01:20" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:01:20" end="00:03:02:21" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:02:21" end="00:03:06:04" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:06:04" end="00:03:11:02" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:11:02" end="00:03:12:14" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:12:14" end="00:03:16:10" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:16:10" end="00:03:25:16" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:25:16" end="00:03:30:02" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:30:02" end="00:03:35:13" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:35:13" end="00:03:35:24" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:35:24" end="00:03:40:07" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:40:07" end="00:03:41:18" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:41:18" end="00:03:49:02" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:49:02" end="00:03:51:13" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:51:13" end="00:03:51:27" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:51:27" end="00:03:54:00" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:54:00" end="00:03:58:15" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:03:58:15" end="00:04:02:18" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:02:18" end="00:04:09:17" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:09:17" end="00:04:13:00" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:13:00" end="00:04:14:04" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:14:04" end="00:04:14:28" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:14:28" end="00:04:16:09" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:16:09" end="00:04:17:07" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:17:07" end="00:04:17:15" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:17:15" end="00:04:20:06" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:20:06" end="00:04:25:04" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:25:04" end="00:04:36:26" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:36:26" end="00:04:38:23" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:38:23" end="00:04:39:15" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:39:15" end="00:04:43:19" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:43:19" end="00:04:44:13" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:44:13" end="00:04:47:12" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:04:47:12" end="00:05:10:12" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:10:12" end="00:05:11:13" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>monitor
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:11:13" end="00:05:13:23" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:13:23" end="00:05:15:20" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:15:20" end="00:05:17:16" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>around
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:17:16" end="00:05:18:08" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:18:08" end="00:05:19:19" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:19:19" end="00:05:22:00" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>face
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+      <p begin="00:05:22:00" end="00:05:23:26" region="pop1" style="basic" tts:origin="10% 84.664000000000001%">
+        <style/>
+        <span>keyboard
+          <style tts:backgroundColor="#000000FF" tts:fontSize="18px"/>
+        </span>
+      </p>
+    </div>
+  </body>
+
+</tt>

@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 import numpy as np
 from os import listdir, walk
-from os.path import isfile, join, splitext
+from os.path import isfile, join, splitext, dirname
 
 def TagToNum(name,codeID):
 	if codeID == 0: #gaze 
@@ -38,6 +38,11 @@ def HmmToFrame(data,codeID):
 	result = []
 	for i in data:
 		result.append([getFrame(i[0]),getFrame(i[1]),TagToNum(i[2],codeID)])
+		if TagToNum(i[2],codeID) > 900000:
+			print ("wrong label")
+			print (i[0])
+			raise ValueError
+
 	result = np.array(result)
 	
 	print "OLD: start: " + str (result[0][0]) + " - end: " + str (result[0][1])
@@ -114,6 +119,9 @@ def ReadXMLFile (inpath,outpath1,outpath2,codeID,splitNum):
 						print (join(root, file))
 					if check :
 						print(file) 
+						
+						print (dirname(join(root, file)))
+
 						data = HmmToFrame(output,codeID)
 						exp = Expand(data)
 

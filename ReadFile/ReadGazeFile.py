@@ -1,4 +1,4 @@
-import convertXML as XTR #XML to RAW
+import convertXML as XTR 
 
 if __name__ == "__main__":
 	inpath = "Data/Gaze/XML/" #double slash because codec is difference
