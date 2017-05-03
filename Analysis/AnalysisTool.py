@@ -33,19 +33,25 @@ def printResult(data,title,name):
 		writer = csv.writer(t)
 		writer.writerows(data)
 
+#index is for conversation 1 or 2
+def readInput(inpath, nameFile, index):
+	dataTH = np.genfromtxt( inpath + "D" + nameFile + "_C" + str(index) + "_TALKING_H_exp.csv", dtype = np.float64, delimiter=',')
+	dataTS = np.genfromtxt( inpath + "D" + nameFile + "_C" + str(index) + "_TALKING_S_exp.csv", dtype = np.float64, delimiter=',')
+	dataG = np.genfromtxt( inpath + "D" + nameFile + "_C" + str(index) + "_GAZE_S_exp.csv", dtype = np.float64, delimiter=',')
+
+	dataTH = dataTH.astype(int) # convert from float to int
+	dataTS = dataTS.astype(int)
+	dataG = dataG.astype(int)
+	return (dataTH, dataTS, dataG)
+
+
 # when DynEnd is True, the End value is dynamic and changing
 def getOverallResult(inpath, Start, End, nameFiles, DynEnd):
 	ori = []
 
 	for nameFile in nameFiles:
 		for i in [1,2]:
-			dataTH = np.genfromtxt( inpath + "D" + nameFile + "_C" + str(i) + "_TALKING_H_exp.csv", dtype = np.float64, delimiter=',')
-			dataTS = np.genfromtxt( inpath + "D" + nameFile + "_C" + str(i) + "_TALKING_S_exp.csv", dtype = np.float64, delimiter=',')
-			dataG = np.genfromtxt( inpath + "D" + nameFile + "_C" + str(i) + "_GAZE_S_exp.csv", dtype = np.float64, delimiter=',')
-
-			dataTH = dataTH.astype(int) # convert from float to int
-			dataTS = dataTS.astype(int)
-			dataG = dataG.astype(int)
+			(dataTH, dataTS, dataG) = readInput(inpath, nameFile,i)
 
 			if DynEnd: #using dynamic ending 
 				(yTH, xTH) = (dataTH.shape)
@@ -53,6 +59,7 @@ def getOverallResult(inpath, Start, End, nameFiles, DynEnd):
 				(yG, xG) = (dataG.shape)
 				End = np.amin(np.asarray([yTH,yTS,yG])) #get the actual end time
 
+			#creating the dayd number, 
 			beg = np.ones((End, 2))
 			dot_value = np.asarray([[int(nameFile),0],[0,i]])
 			beg = np.dot(beg,dot_value)
@@ -68,5 +75,37 @@ def getOverallResult(inpath, Start, End, nameFiles, DynEnd):
 			dataGTH  = combineData(dataG,dataTH,End)
 			dataGTHS  = combineData(dataGTH,dataTS,End)
 			ori.extend(dataGTHS)
-
 	return ori
+
+#using the shorten data
+def getTotal(data, GoT):
+	(x,y) = data.shape
+	if GoT == 0: #0 is gaze
+		cout = np.zeros((4))
+	else:
+		cout = np.zeros((5))
+	i = 0
+	while i < x:
+		cout[data[i][1]-1] = cout[data[i][1]-1] + 1
+		i= i+1
+	return cout
+	
+def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
+	ori = []
+	print len(nameFiles)
+	for nameFile in nameFiles:
+		for i in [1,2]:
+			(dataTH, dataTS, dataG) = readInput(inpath, nameFile,i)
+
+			if DynEnd: #using dynamic ending 
+				(yTH, xTH) = (dataTH.shape)
+				(yTS, xTS) = (dataTS.shape)
+				(yG, xG) = (dataG.shape)
+				End = np.amin(np.asarray([yTH,yTS,yG])) #get the actual end time
+
+			dataTH = shortenData(dataTH,Start,End)
+			dataTS = shortenData(dataTS,Start,End)
+			dataG = shortenData(dataG,Start,End)
+			
+			ToTime = getTotal(dataG, 0)
+			print (ToTime/9000.0*100)
