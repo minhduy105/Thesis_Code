@@ -2,6 +2,7 @@ import numpy as np
 from os import listdir, walk
 from os.path import isfile, join, splitext
 import csv
+from scipy import stats
 
 
 def shortenData (data, start, end): #shorten the data and at the start and end point 
@@ -111,43 +112,96 @@ def countAction(data, actionArr):
 	return out
 
 # added sound/no-sound and no-face/comp-time
-def getMean(data, GoT):
+def updateMeanSDFre (mean,std,fre,index,setOfAction):
+	if setOfAction:
+		mean[index] = np.mean(setOfAction) 		
+		#using sample sd 	
+		#std[index] = np.std(setOfAction,ddof=1) 
+		
+		#using population sd
+		std[index] = np.std(setOfAction)
+		fre[index] = len(setOfAction)
+	return (mean,std,fre)
+
+def getMeanSDFre(data, GoT):
 	(x,y) = data.shape
 	if GoT == 0: #0 is gaze
-		cout = np.zeros((6))
+		mean = np.zeros((6))
+		std = np.zeros((6))
+		fre = np.zeros((6))
 	else:
-		cout = np.zeros((7))
+		mean = np.zeros((7))
+		std = np.zeros((7))
+		fre = np.zeros((7))
 	i = 0
-	while i < cout.size - 2 :
-		cout[i] = np.mean(countAction(data,[i+1])) 			
+	while i < mean.size - 2:
+		setOfAction = countAction(data,[i+1])
+		(mean,std,fre) = updateMeanSDFre(mean,std,fre,i,setOfAction)
 		i= i+1 
 	if GoT == 0:
-		cout[4] = np.mean(countAction(data,[1,2,3]))
-		cout[5] = np.mean(countAction(data,[2,3]))
+		setOfAction = countAction(data,[1,2,3]) #no-face
+		(mean,std,fre) = updateMeanSDFre(mean,std,fre,4,setOfAction)
+		setOfAction = countAction(data,[2,3]) #comp time
+		(mean,std,fre) = updateMeanSDFre(mean,std,fre,5,setOfAction)
 	else:
-		cout[5] = np.mean(countAction(data,[3,4]))
-		cout[6] = np.mean(countAction(data,[1,2,5]))
-	return cout
+		setOfAction = countAction(data,[3,4]) #sound
+		(mean,std,fre) = updateMeanSDFre(mean,std,fre,5,setOfAction)
+		setOfAction = countAction(data,[1,2,5]) #no sound
+		(mean,std,fre) = updateMeanSDFre(mean,std,fre,6,setOfAction)
+	return (mean,std,fre)
 
+##will fo later
+def KSTest(data, GoT):
+	(x,y) = data.shape
+	if GoT == 0: #0 is gaze
+		KSD = np.zeros((6))
+		KSp = np.zeros((6))
+	else:
+		KSD = np.zeros((7))
+		KSp = np.zeros((7))
+	i = 0
+
+	while i < mean.size - 2:
+		setOfAction = countAction(data,[i+1])
+		if setOfAction: 
+			(KSD[i],KSp[i]) = stats.kstest(setOfAction)
+		i= i+1 
+	if GoT == 0:
+		setOfAction = countAction(data,[1,2,3]) #no-face
+		setOfAction = countAction(data,[2,3]) #comp time
+	else:
+		setOfAction = countAction(data,[3,4]) #sound
+		setOfAction = countAction(data,[1,2,5]) #no sound
+	return 
+
+
+def updateDiscriptiveData(ori,data,GoT):
+	TotalAct = getTotalAction(data, GoT)
+	(TotalMean,TotalSD,TotalFre) = getMeanSDFre(data,GoT)
+	ori.extend(TotalAct)
+	ori.extend(TotalMean)
+	ori.extend(TotalSD)
+	ori.extend(TotalFre)
+	# print ("Total") #testing 
+	# print (TotalAct)
+	# print ("Descriptive")
+	# print (TotalMean)
+	# print (TotalSD)
+	# print (TotalFre)
 	
-# added sound/no-sound and no-face/comp-time
-def getSD(data,GoT):
-	return 
-
-# added sound/no-sound and no-face/comp-time
-def getFrequency(data,GoT): #which is size of countAction
-	return 
-
-# do KS test 
+	return ori
 
 
 def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
 	ori = []
-	print len(nameFiles)
 	for nameFile in nameFiles:
+		print (nameFile)
 		for i in [1,2]:
-			(dataTH, dataTS, dataG) = readInput(inpath, nameFile,i)
+			data = []
+			data.append(int(nameFile))
+			data.append(i)
 
+			(dataTH, dataTS, dataG) = readInput(inpath, nameFile,i)
 			if DynEnd: #using dynamic ending 
 				(yTH, xTH) = (dataTH.shape)
 				(yTS, xTS) = (dataTS.shape)
@@ -157,8 +211,48 @@ def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
 			dataTH = shortenData(dataTH,Start,End)
 			dataTS = shortenData(dataTS,Start,End)
 			dataG = shortenData(dataG,Start,End)
-			
-			#get the percentage in 2 decimals 		
-			TotalAct = np.around((getTotalAction(dataG, 0)*100.0/(End-Start)), decimals = 2)
-			TotalMean = getMean(dataG, 0)
 	
+			data = updateDiscriptiveData(data,dataG,0) #update gaze
+			data = updateDiscriptiveData(data,dataTH,1) #update Hawking talking
+			data = updateDiscriptiveData(data,dataTS,1) #update Shakespeare talking
+			
+			ori.append(data)
+	return ori
+
+#width mean how long do you want to check the characteristics
+def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
+	ori = []
+	for nameFile in nameFiles:
+		print (nameFile)
+		for i in [1,2]:
+			j = 0
+			while j < End:		
+				data = []
+				data.append(int(nameFile))
+				data.append(i)
+				data.append(j)
+
+				startSub = j
+				if j+Width > End:
+					endSub = End 
+				else:
+					endSub = j+Width
+
+				(dataTH, dataTS, dataG) = readInput(inpath, nameFile,i)
+				if DynEnd: #using dynamic ending 
+					(yTH, xTH) = (dataTH.shape)
+					(yTS, xTS) = (dataTS.shape)
+					(yG, xG) = (dataG.shape)
+					End = np.amin(np.asarray([yTH,yTS,yG])) #get the actual end time
+
+				dataTH = shortenData(dataTH,startSub,endSub)
+				dataTS = shortenData(dataTS,startSub,endSub)
+				dataG = shortenData(dataG,startSub,endSub)
+		
+				data = updateDiscriptiveData(data,dataG,0) #update gaze
+				data = updateDiscriptiveData(data,dataTH,1) #update Hawking talking
+				data = updateDiscriptiveData(data,dataTS,1) #update Shakespeare talking
+				ori.append(data)
+				j = j + Width
+	return ori
+
