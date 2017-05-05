@@ -78,7 +78,7 @@ def getOverallResult(inpath, Start, End, nameFiles, DynEnd):
 	return ori
 
 #using the shorten data
-def getTotal(data, GoT):
+def getTotalAction(data, GoT):
 	(x,y) = data.shape
 	if GoT == 0: #0 is gaze
 		cout = np.zeros((4))
@@ -89,7 +89,58 @@ def getTotal(data, GoT):
 		cout[data[i][1]-1] = cout[data[i][1]-1] + 1
 		i= i+1
 	return cout
+
+
+def countAction(data, actionArr):
+	(x,y) = data.shape
+	count = 0
+	out = []
+	i = 0 
+	check = False # stop the function to continue adding elements
+	while i < x:
+		if data[i][1] in actionArr:
+			count = count + 1
+			check = True
+			if i == x-1:#adding the last element
+				out.append(count)
+		elif check and data[i][1] not in actionArr:
+			out.append(count)
+			count = 0
+			check = False
+		i = i + 1
+	return out
+
+# added sound/no-sound and no-face/comp-time
+def getMean(data, GoT):
+	(x,y) = data.shape
+	if GoT == 0: #0 is gaze
+		cout = np.zeros((6))
+	else:
+		cout = np.zeros((7))
+	i = 0
+	while i < cout.size - 2 :
+		cout[i] = np.mean(countAction(data,[i+1])) 			
+		i= i+1 
+	if GoT == 0:
+		cout[4] = np.mean(countAction(data,[1,2,3]))
+		cout[5] = np.mean(countAction(data,[2,3]))
+	else:
+		cout[5] = np.mean(countAction(data,[3,4]))
+		cout[6] = np.mean(countAction(data,[1,2,5]))
+	return cout
+
 	
+# added sound/no-sound and no-face/comp-time
+def getSD(data,GoT):
+	return 
+
+# added sound/no-sound and no-face/comp-time
+def getFrequency(data,GoT): #which is size of countAction
+	return 
+
+# do KS test 
+
+
 def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
 	ori = []
 	print len(nameFiles)
@@ -107,5 +158,7 @@ def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
 			dataTS = shortenData(dataTS,Start,End)
 			dataG = shortenData(dataG,Start,End)
 			
-			ToTime = getTotal(dataG, 0)
-			print (ToTime/9000.0*100)
+			#get the percentage in 2 decimals 		
+			TotalAct = np.around((getTotalAction(dataG, 0)*100.0/(End-Start)), decimals = 2)
+			TotalMean = getMean(dataG, 0)
+	

@@ -4,7 +4,7 @@ import AnalysisTool as AT
 if __name__ == "__main__":
 	
 	Start = 0
-	End = 9000
+	End = 200
 	inpath = "Input/"
 	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')
 	print nameFiles
