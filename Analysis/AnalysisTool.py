@@ -112,43 +112,47 @@ def countAction(data, actionArr):
 	return out
 
 # added sound/no-sound and no-face/comp-time
-def updateMeanSDFre (mean,std,fre,index,setOfAction):
+def updateMeanMedSDFre (mean,median,std,fre,index,setOfAction):
 	if setOfAction:
-		mean[index] = np.mean(setOfAction) 		
+		mean[index] = np.mean(setOfAction) 
+		# in case the data is non parametric
+		median[index] = np.median(setOfAction)		
 		#using sample sd 	
 		#std[index] = np.std(setOfAction,ddof=1) 
 		
 		#using population sd
 		std[index] = np.std(setOfAction)
 		fre[index] = len(setOfAction)
-	return (mean,std,fre)
+	return (mean,median,std,fre)
 
-def getMeanSDFre(data, GoT):
+def getMeanMedSDFre(data, GoT):
 	(x,y) = data.shape
 	if GoT == 0: #0 is gaze
 		mean = np.zeros((6))
+		median = np.zeros((6))
 		std = np.zeros((6))
 		fre = np.zeros((6))
 	else:
 		mean = np.zeros((7))
+		median = np.zeros((7))
 		std = np.zeros((7))
 		fre = np.zeros((7))
 	i = 0
 	while i < mean.size - 2:
 		setOfAction = countAction(data,[i+1])
-		(mean,std,fre) = updateMeanSDFre(mean,std,fre,i,setOfAction)
+		(mean,median,std,fre) = updateMeanMedSDFre(mean,median,std,fre,i,setOfAction)
 		i= i+1 
 	if GoT == 0:
 		setOfAction = countAction(data,[1,2,3]) #no-face
-		(mean,std,fre) = updateMeanSDFre(mean,std,fre,4,setOfAction)
+		(mean,median,std,fre) = updateMeanMedSDFre(mean,median,std,fre,4,setOfAction)
 		setOfAction = countAction(data,[2,3]) #comp time
-		(mean,std,fre) = updateMeanSDFre(mean,std,fre,5,setOfAction)
+		(mean,median,std,fre) = updateMeanMedSDFre(mean,median,std,fre,5,setOfAction)
 	else:
 		setOfAction = countAction(data,[3,4]) #sound
-		(mean,std,fre) = updateMeanSDFre(mean,std,fre,5,setOfAction)
+		(mean,median,std,fre) = updateMeanMedSDFre(mean,median,std,fre,5,setOfAction)
 		setOfAction = countAction(data,[1,2,5]) #no sound
-		(mean,std,fre) = updateMeanSDFre(mean,std,fre,6,setOfAction)
-	return (mean,std,fre)
+		(mean,median,std,fre) = updateMeanMedSDFre(mean,median,std,fre,6,setOfAction)
+	return (mean,median,std,fre)
 
 ##will fo later
 def KSTest(data, GoT):
@@ -160,32 +164,35 @@ def KSTest(data, GoT):
 		KSD = np.zeros((7))
 		KSp = np.zeros((7))
 	i = 0
-
-	while i < mean.size - 2:
+	while i < KSD.size - 2:
 		setOfAction = countAction(data,[i+1])
-		if setOfAction: 
-			(KSD[i],KSp[i]) = stats.kstest(setOfAction)
+		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,i,setOfAction)
 		i= i+1 
 	if GoT == 0:
 		setOfAction = countAction(data,[1,2,3]) #no-face
+		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,4,setOfAction)
 		setOfAction = countAction(data,[2,3]) #comp time
+		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,5,setOfAction)
 	else:
 		setOfAction = countAction(data,[3,4]) #sound
+		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,5,setOfAction)
 		setOfAction = countAction(data,[1,2,5]) #no sound
-	return 
-
+		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,6,setOfAction)
+	return (KSD,KSp)
 
 def updateDiscriptiveData(ori,data,GoT):
 	TotalAct = getTotalAction(data, GoT)
-	(TotalMean,TotalSD,TotalFre) = getMeanSDFre(data,GoT)
+	(TotalMean,TotalMedian,TotalSD,TotalFre) = getMeanMedSDFre(data,GoT)
 	ori.extend(TotalAct)
 	ori.extend(TotalMean)
+	ori.extend(TotalMedian)
 	ori.extend(TotalSD)
 	ori.extend(TotalFre)
 	# print ("Total") #testing 
 	# print (TotalAct)
 	# print ("Descriptive")
 	# print (TotalMean)
+	# print (TotalMedian)
 	# print (TotalSD)
 	# print (TotalFre)
 	

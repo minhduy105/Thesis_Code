@@ -1,0 +1,31 @@
+﻿I divide my plan into two essential parts: individual (when I look at the data of each individual person) and group (when I just combine all the data together and treat them as they are from 1 person)
+
+
+Individual:
+This is the area that I have not done a lot of work on as I was focusing on creating a model in the group area.
+
+
+What I plan to do:
+1. Run a Kolmogorov–Smirnov test on each of the actions (from looking at face to speaking) of each individual to see if they actual have a trend in each of their action. 
+2. Run a t-test between convert 1 and 2 for mean, sd, and frequency. This will be within subject 
+3. Run a t-test between each sections of conversation from such as 0-100, 100-200, 200-300.
+4. ANOVA for 2 and 3 steps
+5. Possibly run some correlation with the survey data if you want me to. If we do this, I might try to modify the data with log     
+6. Combining the data from speaking of H and S with G and repeat step 1 to 5: This is the possible combinations that I am interested : 
+* Sound (for both H and S) + (Each of the gaze (face, monitor, keyboard, around, no face, computer only))
+* No Sound (for both H and S) + (Each of the gaze (face, monitor, keyboard, around, no face, computer only))
+* Note: Sound, No Sound, No Face, and Computer only were all described in the readme file 
+
+
+Group:
+This is the one that I have spent most of time on 
+
+
+What I have done:
+1. In my thesis, I just took each of the actions from all of the dyad and calculated the t-test between conversation 1 and 2 for each of the action.
+2. Get all of the combining actions (No sound of both H&S + each of the gaze actions) (this is just the duration for each of those actions in the conversation), use some kind of functions to discretize it and put it into a bar graph, and they tried to fit it into a Possion distribution. I only took the action that are longer than 1 seconds 
+3. Get all of the combining actions (No sound of both H&S + each of the gaze actions) and look at the gaze action in each frame of the actions. This is for looking of there is a pattern of the gaze when the Shakespeare is waiting. For example, do they tend to look away at the 5th second and then look back at the face around the 30th seconds? 
+
+
+What I plan to do:
+1. Redo step 1,2,3 of what I have done section but divide the conversation into smaller section such as 0th-100th secs, 100th-200th secs, 200th-300th secs. Additionally, compared between each subsections using t-test (or z-test because we use the whole population of our data

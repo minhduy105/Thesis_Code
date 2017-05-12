@@ -28,7 +28,7 @@ if __name__ == "__main__":
 	GazeType = ["Around_","Monitor_","Keyboard_","Face_","NoFace_","CompOnly_"]
 	SpeakType = ["NoSpeak_","Typing_","Speaking_","SSS_","Hovering_","Sound_","NoSound_"]
 	Person = ["H_","S_"]
-	Character = ["Mean","PopularSD","Frequency"]
+	Character = ["Mean","Median","PopularSD","Frequency"]
 	inpath = "Input/"
 	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')
 	print nameFiles
@@ -45,10 +45,11 @@ if __name__ == "__main__":
 	ori2 = AT.getDiscriptiveDataWithWidth(inpath, Start, End, nameFiles, False,3000)
 	AT.printResult(ori2,title2,nameOutput2)
 	
-	nameOutput2 = "Output/DiscriptiveData_60secs.csv"
-	title2 = getTitle(title2,GazeType,SpeakType,Person,Character)
-	ori2 = AT.getDiscriptiveDataWithWidth(inpath, Start, End, nameFiles, False,1800)
-	AT.printResult(ori2,title2,nameOutput2)
+	title3 = ["Dyad","Cov","StartFrame"]
+	nameOutput3 = "Output/DiscriptiveData_60secs.csv"
+	title3 = getTitle(title3,GazeType,SpeakType,Person,Character)
+	ori3 = AT.getDiscriptiveDataWithWidth(inpath, Start, End, nameFiles, False,1800)
+	AT.printResult(ori3,title3,nameOutput3)
 
 	
 
