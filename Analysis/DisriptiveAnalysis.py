@@ -1,5 +1,5 @@
 import numpy as np
-import AnalysisTool as AT
+import AnalysisToolForSingleSet as AT
 
 def getTitle(title,GazeType,SpeakType,Person,Character):
 	
@@ -22,13 +22,12 @@ def getTitle(title,GazeType,SpeakType,Person,Character):
 	return title	
 
 if __name__ == "__main__":
-	
 	Start = 0
 	End = 9000
 	GazeType = ["Around_","Monitor_","Keyboard_","Face_","NoFace_","CompOnly_"]
 	SpeakType = ["NoSpeak_","Typing_","Speaking_","SSS_","Hovering_","Sound_","NoSound_"]
 	Person = ["H_","S_"]
-	Character = ["Mean","Median","PopularSD","Frequency"]
+	Character = ["Mean","Median","PopularSD","Frequency","Max","Min"]
 	inpath = "Input/"
 	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')
 	print nameFiles
@@ -50,6 +49,3 @@ if __name__ == "__main__":
 	title3 = getTitle(title3,GazeType,SpeakType,Person,Character)
 	ori3 = AT.getDiscriptiveDataWithWidth(inpath, Start, End, nameFiles, False,1800)
 	AT.printResult(ori3,title3,nameOutput3)
-
-	
-
