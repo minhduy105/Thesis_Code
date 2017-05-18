@@ -264,15 +264,15 @@ def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
 		print (nameFile)
 		for i in [1,2]:
 			print (i)
-			(dataTH, dataTS, dataG) = readInput(inpath, nameFile,i)
+			(dataTHroot, dataTSroot, dataGroot) = readInput(inpath, nameFile,i)
 			if DynEnd: #using dynamic ending 
-				(yTH, xTH) = (dataTH.shape)
-				(yTS, xTS) = (dataTS.shape)
-				(yG, xG) = (dataG.shape)
+				(yTH, xTH) = (dataTHroot.shape)
+				(yTS, xTS) = (dataTSroot.shape)
+				(yG, xG) = (dataGroot.shape)
 				End = np.amin(np.asarray([yTH,yTS,yG])) #get the actual end time
-			dataTH = shortenData(dataTH,Start,End)
-			dataTS = shortenData(dataTS,Start,End)
-			dataG = shortenData(dataG,Start,End)
+			dataTHroot = shortenData(dataTHroot,Start,End)
+			dataTSroot = shortenData(dataTSroot,Start,End)
+			dataGroot = shortenData(dataGroot,Start,End)
 									
 			j = 0
 
@@ -288,9 +288,9 @@ def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
 				else:
 					endSub = j+Width
 
-				dataTH = shortenData(dataTH,startSub,endSub)
-				dataTS = shortenData(dataTS,startSub,endSub)
-				dataG = shortenData(dataG,startSub,endSub)
+				dataTH = shortenData(dataTHroot,startSub,endSub)
+				dataTS = shortenData(dataTSroot,startSub,endSub)
+				dataG = shortenData(dataGroot,startSub,endSub)
 		
 				data = updateDiscriptiveData(data,dataG,0) #update gaze
 				data = updateDiscriptiveData(data,dataTH,1) #update Hawking talking
