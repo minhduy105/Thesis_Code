@@ -1,9 +1,10 @@
 import numpy as np
 import AnalysisToolForSingleSet as ATS
 import AnalysisToolForMultSets as AMS
+import copy
 
-def getTitle(title,SpeakType,Person,Character):
-	
+def getTitle(Title,SpeakType,Person,Character):
+	title = copy.deepcopy(Title)	
 	i = 0
 	for z in Person:
 		i = 0

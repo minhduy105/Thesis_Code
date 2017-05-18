@@ -1,8 +1,9 @@
 import numpy as np
 import AnalysisToolForSingleSet as AT
+import copy
 
-def getTitle(title,GazeType,SpeakType,Person,Character):
-	
+def getTitle(Title,GazeType,SpeakType,Person,Character):
+	title = copy.deepcopy(Title)
 	i = 0
 	while i < 4:
 		title.append("S_"+GazeType[i] + "Overall_Time")

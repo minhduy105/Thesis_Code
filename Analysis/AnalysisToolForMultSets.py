@@ -110,8 +110,8 @@ def getDiscriptiveGazeWithWidth(inpath, Start,End, nameFiles, DynEnd, Width,Gaze
 				dataTH = ATS.shortenData(dataTH,startSub,endSub)
 				dataTS = ATS.shortenData(dataTS,startSub,endSub)
 				dataG = ATS.shortenData(dataG,startSub,endSub)
-				dataGTH  = ATS.combineData(dataG,dataTH,End)
-				dataGTHS  = ATS.combineData(dataGTH,dataTS,End)
+				dataGTH  = ATS.combineData(dataG,dataTH,endSub)
+				dataGTHS  = ATS.combineData(dataGTH,dataTS,endSub)
 				
 				#print (dataGTHS)
 				dataGTHS = formatOneCollumnOfData(dataGTHS,0,GazeType)
@@ -154,11 +154,11 @@ def getDiscriptiveTalkWithWidth(inpath, Start,End, nameFiles, DynEnd, Width,Talk
 				dataTS = ATS.shortenData(dataTS,startSub,endSub)
 				dataG = ATS.shortenData(dataG,startSub,endSub)
 				if Person == 'H': 
-					dataGTH  = ATS.combineData(dataTH,dataG,End)
-					dataGTHS  = ATS.combineData(dataGTH,dataTS,End)
+					dataGTH  = ATS.combineData(dataTH,dataG,endSub)
+					dataGTHS  = ATS.combineData(dataGTH,dataTS,endSub)
 				else:
-					dataGTS  = ATS.combineData(dataTS,dataG,End)
-					dataGTHS  = ATS.combineData(dataGTS,dataTH,End)
+					dataGTS  = ATS.combineData(dataTS,dataG,endSub)
+					dataGTHS  = ATS.combineData(dataGTS,dataTH,endSub)
 				#print (dataGTHS)
 				dataGTHS = formatOneCollumnOfData(dataGTHS,1,TalkType)
 				ori = updateDiscriptiveData(ori,dataGTHS,1,nameFile,i,j)
@@ -168,4 +168,77 @@ def getDiscriptiveTalkWithWidth(inpath, Start,End, nameFiles, DynEnd, Width,Talk
 	# 	print (i)
 	return ori
 
+
+def combinedTwoTalkTogether(dataTH,dataTS):
+	(x,y) = dataTH.shape 
+	talkHS = np.zeros((x,1))
+
+	#testing#
+	dataTS [5][1] = 4
+	dataTH [5][1] = 3
+
+	dataTS [7][1] = 3
+	dataTH [9][1] = 4
+
+
+	talkHS[:,0] = np.where(dataTH[:,1] == 3,1, talkHS[:,0])
+	talkHS[:,0] = np.where(dataTH[:,1] == 4,1, talkHS[:,0])
+	talkHS[:,0] = np.where(dataTS[:,1] == 3,1, talkHS[:,0])
+	talkHS[:,0] = np.where(dataTS[:,1] == 4,1, talkHS[:,0])
+
+	print("TH")
+	print(dataTH)
+	print("TS")
+	print(dataTS)
+	talkHS = np.concatenate(((dataTH[:,0]).reshape((x,1)), talkHS), axis=1)
+	print ("Result")
+	print (talkHS)
+	return
+
+def getDiscriptiveTwoTalkWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
+	#get discription information of the data
+	#width mean how long do you want to check the characteristics
+	#DynEnd dynamic ending
+	#GazeType 
+	ori = []
+	for nameFile in nameFiles:
+		print (nameFile)
+		for i in [1,2]:
+			print (i)
+			(dataTH, dataTS, dataG) = ATS.readInput(inpath, nameFile,i)
+			if DynEnd: #using dynamic ending 
+				(yTH, xTH) = (dataTH.shape)
+				(yTS, xTS) = (dataTS.shape)
+				(yG, xG) = (dataG.shape)
+				End = np.amin(np.asarray([yTH,yTS,yG])) #get the actual end time
+			dataTH = ATS.shortenData(dataTH,Start,End)
+			dataTS = ATS.shortenData(dataTS,Start,End)
+			dataG = ATS.shortenData(dataG,Start,End)
+			combinedTwoTalkTogether(dataTH,dataTS)
+			j = 0
+
+	# 		while j < End:		
+	# 			startSub = j
+	# 			if j+Width > End:
+	# 				endSub = End 
+	# 			else:
+	# 				endSub = j+Width
+
+	# 			dataTH = ATS.shortenData(dataTH,startSub,endSub)
+	# 			dataTS = ATS.shortenData(dataTS,startSub,endSub)
+	# 			dataG = ATS.shortenData(dataG,startSub,endSub)
+	# 			if Person == 'H': 
+	# 				dataGTH  = ATS.combineData(dataTH,dataG,endSub)
+	# 				dataGTHS  = ATS.combineData(dataGTH,dataTS,endSub)
+	# 			else:
+	# 				dataGTS  = ATS.combineData(dataTS,dataG,endSub)
+	# 				dataGTHS  = ATS.combineData(dataGTS,dataTH,endSub)
+	# 			#print (dataGTHS)
+	# 			dataGTHS = formatOneCollumnOfData(dataGTHS,1,TalkType)
+	# 			ori = updateDiscriptiveData(ori,dataGTHS,1,nameFile,i,j)
+
+	# 			j = j + Width
+	# # for i in ori:
+	# 	print (i)
+	return ori
 

@@ -1,9 +1,10 @@
 import numpy as np
 import AnalysisToolForSingleSet as ATS
 import AnalysisToolForMultSets as AMS
+import copy
 
-def getTitle(title,GazeType,SpeakType,Person,Character):
-	
+def getTitle(Title,GazeType,SpeakType,PersonTile,Character):
+	title = copy.deepcopy(Title)
 	i = 0
 	while i < 4:
 		title.append("S_"+GazeType[i] + "Overall_Time")
@@ -12,7 +13,7 @@ def getTitle(title,GazeType,SpeakType,Person,Character):
 		for i in GazeType:
 			title.append("S_" + i + j)	
 
-	z = Person		
+	z = PersonTile		
 	i = 0
 	while i < 5:
 		title.append( z +SpeakType[i] + "Overall_Time")
@@ -31,11 +32,11 @@ if __name__ == "__main__":
 	Character = ["Mean","Median","PopularSD","Frequency","Max","Min"]
 	inpath = "Input/"
 	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')
-	title = ["Dyad","Cov","SectionStartTime","GazeID","Start","End","Duration","GazeType"]
+	title = ["Dyad","Cov","SectionStartTime","TalkID","Start","End","Duration","TalkType"]
 
 	TalkType = (1,2,3,4,5)
 	Person = "H"
-	PersonTile = "S"
+	PersonTile = "S_"
 
 	nameOutput1 = "Output/CombinedOneLayer/Talk/DiscriptiveData_5talks_H_5mins.csv"
 	title1 = getTitle(title,GazeType,SpeakType,PersonTile,Character)
@@ -48,7 +49,7 @@ if __name__ == "__main__":
 	ATS.printResult(ori2,title2,nameOutput2)	
 
 	Person = "S"
-	PersonTile = "H"
+	PersonTile = "H_"
 
 	nameOutput3 = "Output/CombinedOneLayer/Talk/DiscriptiveData_S_5mins.csv"
 	title3 = getTitle(title,GazeType,SpeakType,PersonTile,Character)
@@ -63,7 +64,7 @@ if __name__ == "__main__":
 
 	TalkType = (6,7)
 	Person = "H"
-	PersonTile = "S"
+	PersonTile = "S_"
 
 	nameOutput5 = "Output/CombinedOneLayer/Talk/DiscriptiveData_2talks_H_5mins.csv"
 	title5 = getTitle(title,GazeType,SpeakType,PersonTile,Character)
