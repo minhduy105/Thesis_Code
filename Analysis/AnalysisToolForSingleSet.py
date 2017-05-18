@@ -177,31 +177,6 @@ def getMeanMedSDFreMaxMin(data, GoT):
 		desData = updateMeanMedSDFreMaxMin(desData,6,setOfAction)
 	return desData
 
-##will fo later
-def KSTest(data, GoT):
-	(x,y) = data.shape
-	if GoT == 0: #0 is gaze
-		KSD = np.zeros((6))
-		KSp = np.zeros((6))
-	else:
-		KSD = np.zeros((7))
-		KSp = np.zeros((7))
-	i = 0
-	while i < KSD.size - 2:
-		setOfAction = countAction(data,[i+1])
-		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,i,setOfAction)
-		i= i+1 
-	if GoT == 0:
-		setOfAction = countAction(data,[1,2,3]) #no-face
-		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,4,setOfAction)
-		setOfAction = countAction(data,[2,3]) #comp time
-		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,5,setOfAction)
-	else:
-		setOfAction = countAction(data,[3,4]) #sound
-		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,5,setOfAction)
-		setOfAction = countAction(data,[1,2,5]) #no sound
-		(KSD,KSp) = updateMeanMedSDFre(KSD,KSp,6,setOfAction)
-	return (KSD,KSp)
 
 def updateDiscriptiveData(ori,data,GoT):
 	#update the discriptive information
