@@ -1,0 +1,15 @@
+THIS IS A MODIFICATION of the CRF++ program by Taku Kudo <taku@chasen.org>
+
+Note:
+after install the crf and the python wrapper
+
+run:
+sudo ldconfigls
+
+next, check the model in the test.py to make sure you are using the right model
+
+
+We need to use a POS in addition for the CRF++ as the input required the word and the POS in order to output 
+Hence, we use textblob-aptagger for it (might try NLTK):
+
+pip install -U textblob-aptagger
