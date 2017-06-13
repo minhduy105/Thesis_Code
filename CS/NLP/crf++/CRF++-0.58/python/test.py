@@ -6,7 +6,7 @@ import sys
 try:
     # -v 3: access deep information like alpha,beta,prob
     # -nN: enable nbest output. N should be >= 2
-    tagger = CRFPP.Tagger("-m ../model -v 3 -n2")
+    tagger = CRFPP.Tagger("-m model_file -v 3 -n2")
 
     # clear internal context
     tagger.clear()
