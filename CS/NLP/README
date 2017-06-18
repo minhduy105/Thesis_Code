@@ -1,5 +1,7 @@
 THIS IS A MODIFICATION of the CRF++ program by Taku Kudo <taku@chasen.org>
 
+As I change the install file, I might have to reinstall the crf++ again everytime I am in a new machine
+
 Note:
 after install the crf and the python wrapper
 
