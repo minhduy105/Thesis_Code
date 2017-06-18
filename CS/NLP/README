@@ -4,7 +4,7 @@ Note:
 after install the crf and the python wrapper
 
 run:
-sudo ldconfigls
+sudo ldconfig
 
 next, check the model in the test.py to make sure you are using the right model
 
