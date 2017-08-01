@@ -1,17 +1,12 @@
-THIS IS A MODIFICATION of the CRF++ program by Taku Kudo <taku@chasen.org>
-
-As I change the install file, I might have to reinstall the crf++ again everytime I am in a new machine
-
-Note:
-after install the crf and the python wrapper
-
-run:
-sudo ldconfig
-
-next, check the model in the test.py to make sure you are using the right model
+This project use the CRF++ program by Taku Kudo <taku@chasen.org>
+Information link:
+https://taku910.github.io/crfpp/
 
 
-We need to use a POS in addition for the CRF++ as the input required the word and the POS in order to output 
-Hence, we use textblob-aptagger for it (might try NLTK):
+After you download the git hub. Open the INSTALL file to install the program
+Next, you should go to the python folder and INSTALL it if you want to program it in python. 
 
-pip install -U textblob-aptagger
+Note: you need to train the NLTK to get the CRF model. I am using CoNLL2000 as my training model. 
+
+Install NLTK 
+Download all the necessary NLTK package
