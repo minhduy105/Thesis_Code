@@ -4,6 +4,7 @@ import sys, time, subprocess
 import rospy
 import numpy as np
 import ChunkingSentence as CS
+import random
 from std_msgs.msg import String
 
 class Controll():
@@ -14,6 +15,7 @@ class Controll():
 		self.end = time.time()
 		self.wait = 10
 		self.words = []
+		self.filler = ["wait a second", "uh", "um", "like", "okay", "you know", "right", "okay, so", "you see"]
 	
 	def word_callback(self,word):
 		self.words.append(word.data)
@@ -24,25 +26,33 @@ class Controll():
 			pharse = ' '.join(self.words)
 			self.words = []
 			chunks = CS.get_chunks(pharse)
+			print (chunks)
 			self.words.insert(0,chunks[len(chunks)-1])
 			chunks.pop()
 			sayOut = ' '.join(chunks)
-			self.sayStuff(sayOut)
+			if not sayOut:
+				sayOut = random.choice(self.filler)
+				
+			self.say_male(sayOut)	
 			print (sayOut)
 			self.start = time.time()
 
-	def sayStuff(self,word):
-		cmd = ["rosrun sound_play say.py " + '"'+ word+'"']
-		subprocess.Popen(cmd,shell=True)		
-
+	def say_male(self,text):
+		voice = 'voice_cmu_us_rms_arctic_clunits'
+		command = '({0})\n(SayText \\"{1}\\")'.format(voice, text)
+		subprocess.call('echo "{0}" | festival --pipe'.format(command), shell=True)
+	def say_female(self,text):
+		voice = 'voice_cmu_us_slt_arctic_clunits'
+		command = '({0})\n(SayText \\"{1}\\")'.format(voice, text)
+		subprocess.call('echo "{0}" | festival --pipe'.format(command), shell=True)
 
 if __name__ == '__main__':
 
 	con = Controll()
 	while not rospy.is_shutdown():
 		con.chunk_pharse()
-	try:
-		rospy.spin()
-	except KeyboardInterrupt:
-		print("Shutting down")
+	# try:
+	# 	rospy.spin()
+	# except KeyboardInterrupt:
+	# 	print("Shutting down")
 

@@ -1,12 +1,30 @@
+---Install CRF program:---
+
 This project use the CRF++ program by Taku Kudo <taku@chasen.org>
 Information link:
 https://taku910.github.io/crfpp/
 
-
 After you download the git hub. Open the INSTALL file to install the program
 Next, you should go to the python folder and INSTALL it if you want to program it in python. 
+(Read the readme or install file for instruction)
 
-Note: you need to train the NLTK to get the CRF model. I am using CoNLL2000 as my training model. 
+Note: you need to train the NLTK to get the CRF model file. I am using CoNLL2000 as my training model. 
 
-Install NLTK 
-Download all the necessary NLTK package
+---Install NLTK:--- 
+
+Download all the necessary NLTK package by type python
+>>import nltk
+>>nltk.download('all')
+
+---Install festival and voices pacakge:---
+
++Festival:+ 
+sudo apt-get install festival
+
++Voice package:+
+Go to the link below:
+http://ubuntuforums.org/showthread.php?t=751169
+
+Install the enhanced CMU Arctic voices (rms and slt): 
+use rms for man
+use slt for woman

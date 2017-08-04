@@ -39,9 +39,10 @@ def get_chunks(pharse): #ignore all special character
 
 	return chunks
 
-# pharse = "Confidnece in the pound is widely expected to take another sharp dive if trade figures for September"
+# pharse = "Confidnece in the pound is widely expected to take another sharp dive if trade figures for September ."
 # chunks = get_chunks(pharse)
 # print (chunks)
+# print (' '.join(chunks))
 # print "Done"
 	
 
