@@ -6,25 +6,28 @@ import rospy
 import numpy as np
 from std_msgs.msg import String
 
+#This is the draft GUI for the program. It will publish signle word for the main program to interpret
 class GUI(object):
 	def __init__(self):
 		self.key_pub = rospy.Publisher('word', String, queue_size = 1)
 		rospy.init_node("send_word")
-		self.buf = []
-		self.whole_sentence = []
-		self.seen_space = False
+		self.buf = [] #contain all the character
+		self.whole_sentence = [] #use it for display what is typed by the users
+		self.seen_space = False 
 			
-
+	#Display the whole string to the terminal
 	def print_to_screen(self):
 		sen = ''.join(self.whole_sentence)
 		print(chr(27) + "[2J")
 		print (sen)
 
+	#publish the word to 
 	def publish_word(self):
 		word = ''.join(self.buf)
 		self.key_pub.publish(word)
 		self.buf = []
 
+	#this supposes to read input and publish single word 
 	def read_letter(self,char):
 		if char == '\x08' or char == '\x7f': #for backspace/delete the character
 			if self.buf: #just to prevent the people from hitting the backspace at the beginning
@@ -32,7 +35,7 @@ class GUI(object):
 				self.buf.pop()
 		else:
 			self.whole_sentence.append(char)
-			if char in ['.', ',','!','?',':',';']:
+			if char in ['.', ',','!','?',':',';']: #publish when you see comma or period
 				self.buf.append(char)
 				self.publish_word()
 			else:	
