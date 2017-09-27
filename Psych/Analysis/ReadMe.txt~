@@ -33,10 +33,25 @@ H =  Hawking
 S = Shakespeare  
 
 
-Character = [“Overall_Time”, "Mean", "PopularSD", "Frequency"]
+Character = [“Overall_Time”, "Mean", "PopularSD", "Frequency, Max, Min"]
 Note:
 Overall TIme: the overall time the person is in this action, this one does not have special combine tag such as NoFace or NoSound because you can simply add them together.
 PopularSD: I use popular standard deviation instead of sample standard deviation because I use all of the time 
 
 
 StartFrame: this is just for the 60 seconds and 100 seconds file. This is where the frame start, you can get it to second by divide it to 30 (because 30fps)
+
+Note:
+Gaze:
+Around = 1
+Monitor = 2
+Keyboard = 3
+Face = 4
+
+Talking: 
+No speaking = 1
+Typing = 2
+Speaking = 3
+SSS = 4
+Hovering = 5
+

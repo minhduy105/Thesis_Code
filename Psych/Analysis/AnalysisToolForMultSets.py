@@ -161,16 +161,10 @@ def getDiscriptiveTalkWithWidth(inpath, Start,End, nameFiles, DynEnd, Width,Talk
 	return ori
 
 
-def combinedTwoTalkTogether(dataTH,dataTS):
+#this one combined H and S talking together to make it sound (3) or no sound (1) 
+def combinedTwoTalkTogether(dataTH,dataTS): 
 	(x,y) = dataTH.shape 
 	talkHS = np.ones((x,1),dtype = np.int)
-
-	# #testing#
-	# dataTS [5][1] = 4
-	# dataTH [5][1] = 3
-	# dataTS [7][1] = 3
-	# dataTH [9][1] = 4
-
 
 	talkHS[:,0] = np.where(dataTH[:,1] == 3,3, talkHS[:,0])
 	talkHS[:,0] = np.where(dataTH[:,1] == 4,3, talkHS[:,0])

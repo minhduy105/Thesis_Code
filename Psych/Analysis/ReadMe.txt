@@ -40,3 +40,18 @@ PopularSD: I use popular standard deviation instead of sample standard deviation
 
 
 StartFrame: this is just for the 60 seconds and 100 seconds file. This is where the frame start, you can get it to second by divide it to 30 (because 30fps)
+
+Note:
+Gaze:
+Around = 1
+Monitor = 2
+Keyboard = 3
+Face = 4
+
+Talking: 
+No speaking = 1
+Typing = 2
+Speaking = 3
+SSS = 4
+Hovering = 5
+
