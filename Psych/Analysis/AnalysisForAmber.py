@@ -7,7 +7,7 @@ import csv
 from scipy import stats
 
 
-def countAction(data):
+def countTalking(data):
 	turn = 0 
 	speak = [3,4]
 	(x,y) = data.shape
@@ -37,35 +37,36 @@ def countAction(data):
 
 	return out
 
-def countActionIn3Second(data):
+def countTalkingWithWaitMoreThan3Second(data):
 	turn = 0 
+	addToList = False
 	speak = [3,4]
 	(x,y) = data.shape
 	count = 0
 	wait = 0
 	out = []
 	i = 0 
-	check = False # stop the function to continue adding elements into out
 	while i < x:
 		if data[i][1] in speak:
+			turn = 1 
 			if wait > 0:
 				count = count + wait
+				if wait > 90:
+					addToList = True
 				wait = 0 
 			count = count + 1
-			check = True
 			if i == x-1:#adding the last element
-				out.append(count)
-			if count > 90: 
-				turn = 1 
-				check = True 
+				if addToList:
+					out.append(count)
 		else: 
 			if turn == 1: 
 				wait = wait + 1 
-		if check and data[i][2] in speak and data[i][1] not in speak:
+		if count > 0 and data[i][2] in speak and data[i][1] not in speak:
 			turn = 0
-			out.append(count)
+			if addToList:
+				out.append(count)
+				addToList = False
 			count = 0
-			check = False
 			wait = 0
 		i = i + 1
 	return out
@@ -88,7 +89,7 @@ def updateMeanMedSDFreMaxMin (desData,setOfAction):
 		mini = np.amin(setOfAction)
 	return (mean,median,std,fre,maxi,mini)
 
-def getMeanMedSDFreMaxMin(data):
+def getMeanMedSDFreMaxMin(data,funct):
 	#get the mean median sd and frequency in the set of data
 	(x,y) = data.shape
 	mean = 0.0
@@ -99,7 +100,7 @@ def getMeanMedSDFreMaxMin(data):
 	mini = 0.0
 
 	desData = (mean,median,std,fre,maxi,mini)
-	setOfAction = countAction(data)
+	setOfAction = funct(data)
 	desData = updateMeanMedSDFreMaxMin(desData,setOfAction)
 	
 	return desData
@@ -119,13 +120,15 @@ def readInput(inpath, nameFile, index):
 def updateDiscriptiveData(ori,data):
 	#update the discriptive information
 	#2D array data with frame and type of actions
-	(TotalMean,TotalMedian,TotalSD,TotalFre,TotalMax,TotalMin) = getMeanMedSDFreMaxMin(data)
-	ori.append(TotalMean)
-	ori.append(TotalMedian)
-	ori.append(TotalSD)
-	ori.append(TotalFre)
-	ori.append(TotalMax)
-	ori.append(TotalMin)
+	countMethod = [countTalking,countTalkingWithWaitMoreThan3Second]
+	for f in countMethod:
+		(TotalMean,TotalMedian,TotalSD,TotalFre,TotalMax,TotalMin) = getMeanMedSDFreMaxMin(data,f)
+		ori.append(TotalMean)
+		ori.append(TotalMedian)
+		ori.append(TotalSD)
+		ori.append(TotalFre)
+		ori.append(TotalMax)
+		ori.append(TotalMin)
 	return ori
 
 def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
@@ -146,9 +149,12 @@ def getDiscriptiveData(inpath, Start,End, nameFiles, DynEnd):
 
 			dataTH = ATS.shortenData(dataTH,Start,End)
 			dataTS = ATS.shortenData(dataTS,Start,End)
-			
+
 			data = updateDiscriptiveData(data,ATS.combineData(dataTS,dataTH,End)) #update Shakespeare talking
-			
+			data = updateDiscriptiveData(data,ATS.combineData(dataTH,dataTS,End)) #update Shakespeare talking
+
+			data = ATS.updateDiscriptiveData(data,dataTS,1) #update Shakespear talking
+			data = ATS.updateDiscriptiveData(data,dataTH,1) #update Hawking talking
 			ori.append(data)
 	return ori
 
@@ -166,8 +172,8 @@ def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
 				(yTH, xTH) = (dataTHroot.shape)
 				(yTS, xTS) = (dataTSroot.shape)
 				End = np.amin(np.asarray([yTH,yTS])) #get the actual end time
-			dataTHroot = shortenData(dataTHroot,Start,End)
-			dataTSroot = shortenData(dataTSroot,Start,End)
+			dataTHroot = ATS.shortenData(dataTHroot,Start,End)
+			dataTSroot = ATS.shortenData(dataTSroot,Start,End)
 									
 			j = 0
 
@@ -185,13 +191,15 @@ def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
 				else:
 					endSub = j+Width
 
-				dataTH = shortenData(dataTHroot,startSub,endSub)
-				dataTS = shortenData(dataTSroot,startSub,endSub)
-			
-				data = updateDiscriptiveData(data,ATM.combinedTwoTalkTogether(dataTH,dataTS)) #update Hawking talking
-				data = updateDiscriptiveData(data,ATM.combinedTwoTalkTogether(dataTS,dataTH)) #update Shakespeare talking
+				dataTH = ATS.shortenData(dataTHroot,startSub,endSub)
+				dataTS = ATS.shortenData(dataTSroot,startSub,endSub)
 
-				ori.append(data)
+				data = updateDiscriptiveData(data,ATS.combineData(dataTS,dataTH,End)) #update Shakespeare talking
+				data = updateDiscriptiveData(data,ATS.combineData(dataTH,dataTS,End)) #update Shakespeare talking
+
+				data = ATS.updateDiscriptiveData(data,dataTS,1) #update Shakespear talking
+				data = ATS.updateDiscriptiveData(data,dataTH,1) #update Hawking talking				ori.append(data)
+				
 				j = j + Width
 	return ori
 
@@ -200,8 +208,9 @@ def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
 if __name__ == "__main__":
 
 	Start = 0
-	End = 200
+	End = 300
 	inpath = "Input/"
 	nameFiles = np.loadtxt("NameFileTest.txt", dtype = 'S')
 	ori1 =  getDiscriptiveData(inpath, Start,End, nameFiles, False)
+#	ori1 =  getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, False,50)
 	print ori1 
