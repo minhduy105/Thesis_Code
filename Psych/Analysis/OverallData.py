@@ -1,5 +1,5 @@
 import numpy as np
-import AnalysisTool as AT
+import AnalysisToolForSingleSet as AT
 
 if __name__ == "__main__":
 	# should have more varriable REMEMBER: DON'T CHANGE THIS CODE FIRST, CHANGE THE CODE FOR CONVERTING DATA FROM SRT TO SVN FIRST IF YOU DECIDE TO COMBINING CATEGORIES

@@ -213,4 +213,4 @@ if __name__ == "__main__":
 	nameFiles = np.loadtxt("NameFileTest.txt", dtype = 'S')
 	ori1 =  getDiscriptiveData(inpath, Start,End, nameFiles, False)
 #	ori1 =  getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, False,50)
-	print ori1 
+	print (ori1)

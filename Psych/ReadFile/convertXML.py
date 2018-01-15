@@ -45,11 +45,11 @@ def HmmToFrame(data,codeID):
 
 	result = np.array(result)
 	
-	print "OLD: start: " + str (result[0][0]) + " - end: " + str (result[0][1])
+	print ("OLD: start: " + str (result[0][0]) + " - end: " + str (result[0][1]))
 	start = result[0][0] 
 	result[:,0] -=start
 	result[:,1] -=start
-	print "NEW: start: " + str (result[0][0]) + " - end: " + str (result[0][1])
+	print ("NEW: start: " + str (result[0][0]) + " - end: " + str (result[0][1]))
 	
 	return result
 
@@ -67,7 +67,7 @@ def Expand(inData):
 			else:
 				j = j + 1
 		if 	i > inData[j][0]:
-			print "Critical error in the XML_to_raw code at (for sub in tree) statement, please check near frame: " + 	str(inData[j-1][0])
+			print ("Critical error in the XML_to_raw code at (for sub in tree) statement, please check near frame: " + 	str(inData[j-1][0]))
 			raise ValueError 
 			break
 		result.append([i,val])
@@ -101,7 +101,7 @@ def checkInput(data):
 	for i in result: #checking error
 		if i[2] is '':
 			check = False
-			print "Error (Empty input) at: " +  i[0]
+			print ("Error (Empty input) at: " +  i[0])
 	
 	return result	
 
