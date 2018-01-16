@@ -31,7 +31,7 @@ if __name__ == "__main__":
 	Start = 0
 	End = 9000
 	SpeakType = ["NoSound_","Sound_"]
-	GazeType = ["Around_","Monitor_","Keyboard_","Face_","NoFace_","CompOnly_"]
+	GazeType = ["Around_","Monitor_","Keyboard_","Face_","NoFace_","CompOnly_","BodyOnly_"]
 	Character = ["Mean","Median","PopularSD","Frequency","Max","Min"]
 	inpath = "Input/"
 	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')

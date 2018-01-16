@@ -17,6 +17,9 @@ def formatOneCollumnOfData(dataGTHS,GoT,Type):
 		if 6 in Type: #comp time
 			dataGTHS[:,1] = np.where(dataGTHS[:,1] == 2 ,6, dataGTHS[:,1] )
 			dataGTHS[:,1] = np.where(dataGTHS[:,1] == 3 ,6, dataGTHS[:,1] )
+		if 7 in Type: #for body
+			dataGTHS[:, 1] = np.where(dataGTHS[:, 1] == 3, 7, dataGTHS[:, 1])
+			dataGTHS[:, 1] = np.where(dataGTHS[:, 1] == 4, 7, dataGTHS[:, 1])
 	else:
 		if 6 in Type: #sound
 			dataGTHS[:,1] = np.where(dataGTHS[:,1] == 3 ,6, dataGTHS[:,1] )

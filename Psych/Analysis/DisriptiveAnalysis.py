@@ -25,7 +25,7 @@ def getTitle(Title,GazeType,SpeakType,Person,Character):
 if __name__ == "__main__":
 	Start = 0
 	End = 9000
-	GazeType = ["Around_","Monitor_","Keyboard_","Face_","NoFace_","CompOnly_"]
+	GazeType = ["Around_","Monitor_","Keyboard_","Face_","NoFace_","CompOnly_","BodyOnly_"]
 	SpeakType = ["NoSpeak_","Typing_","Speaking_","SSS_","Hovering_","Sound_","NoSound_"]
 	Person = ["H_","S_"]
 	Character = ["Mean","Median","PopularSD","Frequency","Max","Min"]

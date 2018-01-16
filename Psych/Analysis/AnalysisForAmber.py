@@ -210,7 +210,7 @@ if __name__ == "__main__":
 	Start = 0
 	End = 300
 	inpath = "Input/"
-	nameFiles = np.loadtxt("NameFileTest.txt", dtype = 'S')
+	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')
 	ori1 =  getDiscriptiveData(inpath, Start,End, nameFiles, False)
 #	ori1 =  getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, False,50)
 	print (ori1)

@@ -51,7 +51,7 @@ if __name__ == "__main__":
 	ori4 = AMS.getDiscriptiveGazeWithWidth(inpath, Start, End, nameFiles, False,3000,GazeType)
 	ATS.printResult(ori4,title4,nameOutput4)	
 
-	GazeType = (1,4,5)
+	GazeType = (1,4,6)
 
 	nameOutput5 = "Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_5mins.csv"
 	title5 = getTitle(title,SpeakType,Person,Character)
@@ -62,3 +62,16 @@ if __name__ == "__main__":
 	title6 = getTitle(title,SpeakType,Person,Character)
 	ori6 = AMS.getDiscriptiveGazeWithWidth(inpath, Start, End, nameFiles, False,3000,GazeType)
 	ATS.printResult(ori6,title6,nameOutput6)	
+
+
+	GazeType = (1,2,7)
+
+	nameOutput7 = "Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_body_5mins.csv"
+	title7 = getTitle(title,SpeakType,Person,Character)
+	ori7 = AMS.getDiscriptiveGazeWithWidth(inpath, Start, End, nameFiles, False,9000,GazeType)
+	ATS.printResult(ori7,title7,nameOutput7)
+
+	nameOutput8 = "Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_body_100sec.csv"
+	title8 = getTitle(title,SpeakType,Person,Character)
+	ori8 = AMS.getDiscriptiveGazeWithWidth(inpath, Start, End, nameFiles, False,3000,GazeType)
+	ATS.printResult(ori8,title8,nameOutput8)

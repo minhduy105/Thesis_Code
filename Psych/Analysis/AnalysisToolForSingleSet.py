@@ -145,12 +145,12 @@ def getMeanMedSDFreMaxMin(data, GoT):
 	#get the mean median sd and frequency in the set of data
 	(x,y) = data.shape
 	if GoT == 0: #0 is gaze
-		mean = np.zeros((6))
-		median = np.zeros((6))
-		std = np.zeros((6))
-		fre = np.zeros((6))
-		maxi = np.zeros((6))
-		mini = np.zeros((6))
+		mean = np.zeros((7))
+		median = np.zeros((7))
+		std = np.zeros((7))
+		fre = np.zeros((7))
+		maxi = np.zeros((7))
+		mini = np.zeros((7))
 	else:
 		mean = np.zeros((7))
 		median = np.zeros((7))
@@ -170,6 +170,8 @@ def getMeanMedSDFreMaxMin(data, GoT):
 		desData = updateMeanMedSDFreMaxMin(desData,4,setOfAction)
 		setOfAction = countAction(data,[2,3]) #comp time
 		desData = updateMeanMedSDFreMaxMin(desData,5,setOfAction)
+		setOfAction = countAction(data, [3, 4])  #body
+		desData = updateMeanMedSDFreMaxMin(desData, 6, setOfAction)
 	else:
 		setOfAction = countAction(data,[3,4]) #sound
 		desData = updateMeanMedSDFreMaxMin(desData,5,setOfAction)
