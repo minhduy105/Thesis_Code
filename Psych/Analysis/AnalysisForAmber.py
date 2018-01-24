@@ -208,9 +208,9 @@ def getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, DynEnd, Width):
 if __name__ == "__main__":
 
 	Start = 0
-	End = 300
+	End = 9000
 	inpath = "Input/"
-	nameFiles = np.loadtxt("NameFile.txt", dtype = 'S')
+	nameFiles = np.loadtxt("Name2", dtype = 'S')
 	ori1 =  getDiscriptiveData(inpath, Start,End, nameFiles, False)
 #	ori1 =  getDiscriptiveDataWithWidth(inpath, Start,End, nameFiles, False,50)
 	print (ori1)

@@ -24,31 +24,36 @@ H_talk_Type_2 <- H_talk_Type_2[H_talk_Type_2$Duration > 100,]
 
 #calculate the gaze percent of (around, monitor, keyboard, and face) and add it into the file
 GazePercent <- H_talk_Type_2[,6:9]/H_talk_Type_2$Duration * 100.0
-colnames(GazePercent) <-c("S_Percent_Around","S_Percent_MOnitor","S_Percent_Keyboard","S_Percent_Face")
+colnames(GazePercent) <-c("S_Percent_Around","S_Percent_Monitor","S_Percent_Keyboard","S_Percent_Face")
 H_talk_Type_2 <-cbind(H_talk_Type_2,GazePercent)
+
 
 #calculat the overall of nocomp and no_face gaze
 CompOnly_Overall_Time <- H_talk_Type_2$S_Monitor_Overall_Time + H_talk_Type_2$S_Keyboard_Overall_Time
 NoFace_Overall_Time <- CompOnly_Overall_Time + H_talk_Type_2$S_Around_Overall_Time
+BodyOnly_Overall_Time <- H_talk_Type_2$S_Monitor_Overall_Time + H_talk_Type_2$S_Face_Overall_Time
+
 CompOnly_Percent <- CompOnly_Overall_Time/H_talk_Type_2$Duration *100.0
 NoFace_Percent <- NoFace_Overall_Time/H_talk_Type_2$Duration *100.0
-Extra_Gaze <- cbind(CompOnly_Overall_Time,NoFace_Overall_Time,CompOnly_Percent,NoFace_Percent)
-colnames(Extra_Gaze) <-c("S_CompOnly_Overall_Time","S_NoFace_Overall_Time","S_CompOnly_Percent","S_NoFace_Percent")
+BodyOnly_Percent <- BodyOnly_Overall_Time/H_talk_Type_2$Duration *100.0
+
+Extra_Gaze <- cbind(CompOnly_Overall_Time, NoFace_Overall_Time, BodyOnly_Overall_Time, 
+                    CompOnly_Percent, NoFace_Percent, BodyOnly_Percent)
+colnames(Extra_Gaze) <-c("S_CompOnly_Overall_Time","S_NoFace_Overall_Time", "S_BodyOnly_Overall_Time", 
+                         "S_CompOnly_Percent", "S_NoFace_Percent", "S_BodyOnly_Percent")
 H_talk_Type_2 <- cbind(H_talk_Type_2,Extra_Gaze)
 
 # aggregate/combined them together 
-H_talk_Type_2_mean <- aggregate(H_talk_Type_2[, 4:100],list(H_talk_Type_2$Dyad),mean)
-H_talk_Type_2_sum <- aggregate(H_talk_Type_2[, 4:100],list(H_talk_Type_2$Dyad),sum)
-H_talk_Type_2_max <- aggregate(H_talk_Type_2[, 4:100],list(H_talk_Type_2$Dyad),max)
-H_talk_Type_2_min <- aggregate(H_talk_Type_2[, 4:100],list(H_talk_Type_2$Dyad),min)
+H_talk_Type_2_mean <- aggregate(H_talk_Type_2[, 4:108],list(H_talk_Type_2$Dyad),mean)
+H_talk_Type_2_sum <- aggregate(H_talk_Type_2[, 4:108],list(H_talk_Type_2$Dyad),sum)
+H_talk_Type_2_max <- aggregate(H_talk_Type_2[, 4:108],list(H_talk_Type_2$Dyad),max)
+H_talk_Type_2_min <- aggregate(H_talk_Type_2[, 4:108],list(H_talk_Type_2$Dyad),min)
 
 
-
-
-#-----------------Draw Density Map-----------------------------#
+#---------------------Draw Density Map-----------------------------#
 #Run each section one at a time 
 
-#------Mean of Mean----------------------#
+#-----------------------Mean of Mean-------------------------------#
 #individual map
 Mean_Around_Mean <- density(H_talk_Type_2_mean$S_Around_Mean) # returns the density data 
 plot(Mean_Around_Mean,main = "Mean of Around Mean")
@@ -104,7 +109,7 @@ legend(x="topright",
        col=c("blue","red","green","purple","black","yellow"), lwd=1, lty=c(1,2,3,4,5,6), 
        pch=c(NA,NA)) 
 
-#------Mean of Percent----------------------#
+#------------------------Mean of Percent---------------------------#
 
 #individual map
 Mean_Around_Percent <- density(H_talk_Type_2_mean$S_Percent_Around) # returns the density data 
@@ -162,7 +167,7 @@ legend(x="topright",
 
 
 
-#------Sum of Overall----------------------#
+#---------------------Sum of Overall----------------------#
 #individual map
 Sum_Around_All <- density(H_talk_Type_2_sum$S_Around_Overall_Time) # returns the density data 
 plot(Sum_Around_All,main = "Sum of Around All")
@@ -231,14 +236,14 @@ testData <- cbind(Rapport_Data$hdyad,Rapport_Data$htechint,
 colnames(testData) <-c("dyad","techint","hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability",
                        "hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2")
 
-#---Sum of Overall and all of the above 
+#---Sum of Overall and all of the above---# 
 combinedForSum <- merge(x=testData, y=H_talk_Type_2_sum, by.x='dyad', by.y='Group.1')
 
 #3 dimension array row is the scale, column is the gaze, depth is stat result
 # row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
 # column: around, monitor, keyboard, face, componly, no face
 # depth: t-value, correlation, p-value
-Result <- array(numeric(),c(15,6,3))
+Result <- array(numeric(),c(15,7,3))
 for (i in 3:17){
   for (j in 20:23){
     result <- cor.test(combinedForSum[,i],combinedForSum[,j], method = "pearson")
@@ -256,25 +261,31 @@ for (i in 3:17){
   Result[i-2,6,2] <-result$estimate #corelation
   Result[i-2,6,3] <-result$p.value #p-value  
 
+  result <- cor.test(combinedForSum[,i],combinedForSum$S_BodyOnly_Overall_Time , method = "pearson")
+  Result[i-2,7,1] <-result$statistic #t-value  
+  Result[i-2,7,2] <-result$estimate #corelation
+  Result[i-2,7,3] <-result$p.value #p-value  
+  
+    
 }
 print (Result)
 Sum_Overall <-Result
 
 
-#---Mean of Percent and all of the above 
+#---Mean of Percent and all of the above----#
 combinedForMean <- merge(x=testData, y=H_talk_Type_2_mean, by.x='dyad', by.y='Group.1')
 
 #3 dimension array row is the scale, column is the gaze, depth is stat result
 # row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
 # column: around, monitor, keyboard, face, componly, no face
 # depth: t-value, correlation, p-value
-Result <- array(numeric(),c(15,6,3))
+Result <- array(numeric(),c(15,7,3))
 for (i in 3:17){
-  for (j in 107:110){
+  for (j in 113:116){
     result <- cor.test(combinedForMean[,i],combinedForMean[,j], method = "pearson")
-    Result[i-2,j-106,1] <-result$statistic #t-value  
-    Result[i-2,j-106,2] <-result$estimate #corelation
-    Result[i-2,j-106,3] <-result$p.value #p-value  
+    Result[i-2,j-112,1] <-result$statistic #t-value  
+    Result[i-2,j-112,2] <-result$estimate #corelation
+    Result[i-2,j-112,3] <-result$p.value #p-value  
   }
   result <- cor.test(combinedForMean[,i],combinedForMean$S_CompOnly_Percent, method = "pearson")
   Result[i-2,5,1] <-result$statistic #t-value  
@@ -286,6 +297,11 @@ for (i in 3:17){
   Result[i-2,6,2] <-result$estimate #corelation
   Result[i-2,6,3] <-result$p.value #p-value  
 
+  result <- cor.test(combinedForMean[,i],combinedForMean$S_BodyOnly_Percent, method = "pearson")
+  Result[i-2,7,1] <-result$statistic #t-value  
+  Result[i-2,7,2] <-result$estimate #corelation
+  Result[i-2,7,3] <-result$p.value #p-value  
+  
 }
 print (Result)
 Mean_Percent <-Result
@@ -298,9 +314,9 @@ combinedForMean <- merge(x=testData, y=H_talk_Type_2_mean, by.x='dyad', by.y='Gr
 # row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
 # column: around, monitor, keyboard, face,  no face, componly ################## different #######
 # depth: t-value, correlation, p-value
-Result <- array(numeric(),c(15,6,3))
+Result <- array(numeric(),c(15,7,3))
 for (i in 3:17){
-  for (j in 24:29){
+  for (j in 24:30){
     result <- cor.test(combinedForMean[,i],combinedForMean[,j], method = "pearson")
     Result[i-2,j-23,1] <-result$statistic #t-value  
     Result[i-2,j-23,2] <-result$estimate #corelation
