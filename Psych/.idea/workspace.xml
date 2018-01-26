@@ -2,38 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11ec975f-0a76-4745-a438-02b0ab27f425" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Analysis/Name2" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Analysis/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Analysis/AnalysisForAmber.py" afterPath="$PROJECT_DIR$/Analysis/AnalysisForAmber.py" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Descriptive/DiscriptiveData_100secs.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Descriptive/DiscriptiveData_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Descriptive/DiscriptiveData_60secs.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkH+S/DiscriptiveData_Gaze_Sound_100secs.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkH+S/DiscriptiveData_Gaze_Sound_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkH+S/DiscriptiveData_Sound_Gaze_100secs.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkH+S/DiscriptiveData_Sound_Gaze_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Gaze/DiscriptiveData_2gazes_100sec.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Gaze/DiscriptiveData_2gazes_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Gaze/DiscriptiveData_3gazes_100sec.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Gaze/DiscriptiveData_3gazes_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Gaze/DiscriptiveData_4gazes_100sec.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Gaze/DiscriptiveData_4gazes_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Talk/DiscriptiveData_2talks_H_100sec.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Talk/DiscriptiveData_2talks_H_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Talk/DiscriptiveData_5talks_H_100sec.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Talk/DiscriptiveData_5talks_H_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Talk/DiscriptiveData_S_100sec.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/GazeTalkHTalkS/Talk/DiscriptiveData_S_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/OriginalData/OverallData_EndTime_5min.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/OriginalData/OverallData_EndTime_Actual.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Readme.pdf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Reliability/Reliability_Data_Gaze_5min.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Reliability/Reliability_Data_Talking_Hawking_5min.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Reliability/Reliability_Data_Talking_Shakespear_5min.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Analysis/CompletedGazeData/Test/TTestData_5mins.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/RatingEmo/DiscriptiveData_5talks_H_5mins.csv" afterPath="$PROJECT_DIR$/RatingEmo/DiscriptiveData_5talks_H_5mins.csv" />
-      <change beforePath="$PROJECT_DIR$/RatingEmo/sumarize gaze data.R" afterPath="$PROJECT_DIR$/RatingEmo/sumarize gaze data.R" />
+      <change beforePath="$PROJECT_DIR$/Analysis/NameFile.txt" afterPath="$PROJECT_DIR$/Analysis/NameFile.txt" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_2gazes_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_2gazes_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_2gazes_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_2gazes_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_body_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_body_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_body_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_3gazes_body_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_4gazes_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_4gazes_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_4gazes_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Gaze/DiscriptiveData_4gazes_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_2talks_H_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_2talks_H_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_2talks_H_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_2talks_H_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_5talks_H_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_5talks_H_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_5talks_H_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_5talks_H_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_S_100sec.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_S_100sec.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_S_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/CombinedOneLayer/Talk/DiscriptiveData_S_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/DiscriptiveData_100secs.csv" afterPath="$PROJECT_DIR$/Analysis/Output/DiscriptiveData_100secs.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/DiscriptiveData_5mins.csv" afterPath="$PROJECT_DIR$/Analysis/Output/DiscriptiveData_5mins.csv" />
+      <change beforePath="$PROJECT_DIR$/Analysis/Output/DiscriptiveData_60secs.csv" afterPath="$PROJECT_DIR$/Analysis/Output/DiscriptiveData_60secs.csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,40 +30,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="AnalysisForAmber.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Analysis/AnalysisForAmber.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2421">
-              <caret line="210" column="11" lean-forward="false" selection-start-line="210" selection-start-column="11" selection-end-line="210" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DisriptiveAnalysisForTalk.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Analysis/DisriptiveAnalysisForTalk.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-147">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DisriptiveAnalysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Analysis/DisriptiveAnalysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="38" column="32" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FrameByFrameAnalysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Analysis/FrameByFrameAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -85,18 +37,6 @@
               <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AnalysisToolForMultSets.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Analysis/AnalysisToolForMultSets.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="118" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,23 +129,6 @@
             </path>
             <path>
               <item name="Psych" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Psych" type="462c0819:PsiDirectoryNode" />
-              <item name="ReadFile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Psych" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Psych" type="462c0819:PsiDirectoryNode" />
-              <item name="ReadFile" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Psych" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Psych" type="462c0819:PsiDirectoryNode" />
-              <item name="ReadFile" type="462c0819:PsiDirectoryNode" />
-              <item name="DataRe" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Psych" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -238,7 +161,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.AnalysisForAmber">
+  <component name="RunManager" selected="Python.OverallData">
     <configuration name="AnalysisForAmber" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -293,24 +216,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="DisriptiveAnalysisForSpeakNoSpeak" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Analysis" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Psych" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Analysis/DisriptiveAnalysisForSpeakNoSpeak.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="DisriptiveAnalysisForTalk" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -329,20 +234,38 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="OverallData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Psych" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Analysis/OverallData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForGaze" />
       <item index="1" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForTalk" />
       <item index="2" class="java.lang.String" itemvalue="Python.DisriptiveAnalysis" />
-      <item index="3" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForSpeakNoSpeak" />
-      <item index="4" class="java.lang.String" itemvalue="Python.AnalysisForAmber" />
+      <item index="3" class="java.lang.String" itemvalue="Python.AnalysisForAmber" />
+      <item index="4" class="java.lang.String" itemvalue="Python.OverallData" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.AnalysisForAmber" />
-        <item index="1" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForSpeakNoSpeak" />
-        <item index="2" class="java.lang.String" itemvalue="Python.DisriptiveAnalysis" />
-        <item index="3" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForGaze" />
-        <item index="4" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForTalk" />
+        <item index="0" class="java.lang.String" itemvalue="Python.OverallData" />
+        <item index="1" class="java.lang.String" itemvalue="Python.DisriptiveAnalysis" />
+        <item index="2" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForGaze" />
+        <item index="3" class="java.lang.String" itemvalue="Python.DisriptiveAnalysisForTalk" />
+        <item index="4" class="java.lang.String" itemvalue="Python.AnalysisForAmber" />
       </list>
     </recent_temporary>
   </component>
@@ -364,12 +287,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37760702" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2349067" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2349067" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -399,7 +321,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -425,7 +347,7 @@
         <state relative-caret-position="756">
           <caret line="38" column="32" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="32" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -435,7 +357,7 @@
         <state relative-caret-position="630">
           <caret line="33" column="89" lean-forward="false" selection-start-line="33" selection-start-column="89" selection-end-line="33" selection-end-column="89" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -445,7 +367,7 @@
         <state relative-caret-position="3528">
           <caret line="172" column="50" lean-forward="false" selection-start-line="172" selection-start-column="50" selection-end-line="172" selection-end-column="50" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -455,7 +377,7 @@
         <state relative-caret-position="1533">
           <caret line="76" column="43" lean-forward="false" selection-start-line="76" selection-start-column="43" selection-end-line="76" selection-end-column="43" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -465,7 +387,7 @@
         <state relative-caret-position="294">
           <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -475,7 +397,7 @@
         <state relative-caret-position="126">
           <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -485,7 +407,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -540,7 +462,7 @@
         <state relative-caret-position="-393">
           <caret line="33" column="42" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="42" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -550,7 +472,7 @@
         <state relative-caret-position="4326">
           <caret line="206" column="22" lean-forward="false" selection-start-line="206" selection-start-column="4" selection-end-line="206" selection-end-column="22" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -560,7 +482,7 @@
         <state relative-caret-position="27">
           <caret line="33" column="89" lean-forward="false" selection-start-line="33" selection-start-column="89" selection-end-line="33" selection-end-column="89" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -578,7 +500,7 @@
         <state relative-caret-position="2421">
           <caret line="210" column="11" lean-forward="false" selection-start-line="210" selection-start-column="11" selection-end-line="210" selection-end-column="11" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -588,7 +510,7 @@
         <state relative-caret-position="798">
           <caret line="38" column="32" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="32" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -604,9 +526,9 @@
     <entry file="file://$PROJECT_DIR$/Analysis/AnalysisToolForMultSets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="426">
-          <caret line="118" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <caret line="118" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
