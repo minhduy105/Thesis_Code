@@ -250,6 +250,86 @@ write.csv(Mean_Mean[,,3],paste(Path,"/Output/mean_mean_pval.csv",sep=""))
 
 
 
+
+#-------------------------------------Sum of Percent and all of the above-----------------------------------#
+combinedForSum <- merge(x=testData, y=H_talk_Type_2_sum, by.x='dyad', by.y='Group.1')
+
+#3 dimension array row is the scale, column is the gaze, depth is stat result
+# row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
+# column: around, monitor, keyboard, face, componly, no face
+# depth: t-value, correlation, p-value
+Result <- array(numeric(),c(15,8,3))
+for (i in 3:17){
+  for (j in 113:116){
+    result <- cor.test(combinedForSum[,i],combinedForSum[,j], method = "pearson")
+    Result[i-2,j-112,1] <-result$statistic #t-value  
+    Result[i-2,j-112,2] <-result$estimate #corelation
+    Result[i-2,j-112,3] <-result$p.value #p-value  
+  }
+  result <- cor.test(combinedForSum[,i],combinedForSum$S_CompOnly_Percent, method = "pearson")
+  Result[i-2,5,1] <-result$statistic #t-value  
+  Result[i-2,5,2] <-result$estimate #corelation
+  Result[i-2,5,3] <-result$p.value #p-value  
+  
+  result <- cor.test(combinedForSum[,i],combinedForSum$S_NoFace_Percent, method = "pearson")
+  Result[i-2,6,1] <-result$statistic #t-value  
+  Result[i-2,6,2] <-result$estimate #corelation
+  Result[i-2,6,3] <-result$p.value #p-value  
+  
+  result <- cor.test(combinedForSum[,i],combinedForSum$S_BodyOnly_Percent, method = "pearson")
+  Result[i-2,7,1] <-result$statistic #t-value  
+  Result[i-2,7,2] <-result$estimate #corelation
+  Result[i-2,7,3] <-result$p.value #p-value  
+  
+  result <- cor.test(combinedForSum[,i],combinedForSum$S_Speaking_Per, method = "pearson")
+  Result[i-2,8,1] <-result$statistic #t-value  
+  Result[i-2,8,2] <-result$estimate #corelation
+  Result[i-2,8,3] <-result$p.value #p-value  
+  
+}
+
+rownames(Result) <-c("hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability",
+                     "hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2")
+colnames (Result)<-c("around", "monitor", "keyboard", "face", "comp_only", "no_face","body_only","s_speak")
+print (Result)
+Sum_Percent <-Result
+
+write.csv(Sum_Percent[,,1],paste(Path,"/Output/sum_percent_tval.csv",sep=""))
+write.csv(Sum_Percent[,,2],paste(Path,"/Output/sum_percent_cor.csv",sep=""))
+write.csv(Sum_Percent[,,3],paste(Path,"/Output/sum_percent_pval.csv",sep=""))
+
+
+#-------------------------------------Mean of Percent compared to total and all of the above-----------------------------------#
+combinedForSum <- merge(x=testData, y=H_talk_Type_2_sum, by.x='dyad', by.y='Group.1')
+
+#3 dimension array row is the scale, column is the gaze, depth is stat result
+# row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
+# column: around, monitor, keyboard, face, componly, no face
+# depth: t-value, correlation, p-value
+Result <- array(numeric(),c(15,9,3))
+for (i in 3:17){
+  for (j in 123:130){
+    result <- cor.test(combinedForSum[,i],combinedForSum[,j], method = "pearson")
+    Result[i-2,j-122,1] <-result$statistic #t-value  
+    Result[i-2,j-122,2] <-result$estimate #corelation
+    Result[i-2,j-122,3] <-result$p.value #p-value  
+  }
+  result <- cor.test(combinedForSum[,i],combinedForSum$S_Speaking_Per_Total, method = "pearson")
+  Result[i-2,9,1] <-result$statistic #t-value  
+  Result[i-2,9,2] <-result$estimate #corelation
+  Result[i-2,9,3] <-result$p.value #p-value  
+}
+
+rownames(Result) <-c("hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability",
+                     "hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2")
+colnames (Result)<-c("h_typing","around", "monitor", "keyboard", "face", "comp_only", "no_face","body_only","s_speak")
+print (Result)
+Sum_Percent_Total <-Result
+
+write.csv(Sum_Percent_Total[,,1],paste(Path,"/Output/sum_percent_total_tval.csv",sep=""))
+write.csv(Sum_Percent_Total[,,2],paste(Path,"/Output/sum_percent_total_cor.csv",sep=""))
+write.csv(Sum_Percent_Total[,,3],paste(Path,"/Output/sum_percent_total_pval.csv",sep=""))
+
 #---------------------Draw Density Map-----------------------------#
 #Run each section one at a time 
 
@@ -315,7 +395,7 @@ legend(x="topright",
 Mean_Around_Percent <- density(H_talk_Type_2_mean$S_Percent_Around) # returns the density data 
 plot(Mean_Around_Percent,main = "Mean of Around Percent")
 
-Mean_Monitor_Percent <- density(H_talk_Type_2_mean$S_Percent_MOnitor) # returns the density data 
+Mean_Monitor_Percent <- density(H_talk_Type_2_mean$S_Percent_Monitor) # returns the density data 
 plot(Mean_Monitor_Percent,main = "Mean of Monitor Percent")
 
 Mean_Keyboard_Percent <- density(H_talk_Type_2_mean$S_Percent_Keyboard) # returns the density data 

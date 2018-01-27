@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="11ec975f-0a76-4745-a438-02b0ab27f425" name="Default" comment="" />
+    <list default="true" id="11ec975f-0a76-4745-a438-02b0ab27f425" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_mean_cor.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_mean_pval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_mean_tval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_percent_cor.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_percent_pval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_percent_total_cor.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_percent_total_pval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_percent_total_tval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/mean_percent_tval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/sum_overall_cor.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/sum_overall_pval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/Output/sum_overall_tval.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/RatingEmo/sumarize gaze data.R" afterPath="$PROJECT_DIR$/RatingEmo/sumarize gaze data.R" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
