@@ -4,7 +4,7 @@ library(sm)
 #read the data-- change it to match with the path
 
 Path <- "D:/Thesis/Thesis_Code/Psych/RatingEmo/"
-Threshhold <-150
+Threshhold <-480
 
 H_talk <- read.csv(paste(Path,"DiscriptiveData_5talks_H_5mins.csv", sep=""))
 Rapport_Data <- read.csv(paste(Path,"personal trait data.csv", sep=""))
@@ -108,52 +108,45 @@ write.csv(H_talk_Type_2_sum,paste(Path,paste("/Output/dyad2_data_sum_",Name,sep=
 
 combinedForSum <- merge(x=Rapport_Data, y=H_talk_Type_1_sum, by.x='hdyad', by.y='Group.1')
 
-#3 dimension array row is the scale, column is the gaze, depth is stat result
-# row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
-# column: around, monitor, keyboard, face, componly, no face
-# depth: t-value, correlation, p-value
-Result <- array(numeric(),c(8,6,3))
-for (i in 980:987){
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa1t4, method = "pearson")
-  Result[i-979,1,1] <-result$statistic #t-value  
-  Result[i-979,1,2] <-result$estimate #corelation
-  Result[i-979,1,3] <-result$p.value #p-value  
+Result <- array(numeric(),c(3,6))
+result <- cor.test(combinedForSum$hpa1t4,combinedForSum$ssa1t4, method = "pearson")
+Result[1,1] <-result$statistic #t-value  
+Result[2,1] <-result$estimate #corelation
+Result[3,1] <-result$p.value #p-value  
   
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa1m2, method = "pearson")
-  Result[i-979,2,1] <-result$statistic #t-value  
-  Result[i-979,2,2] <-result$estimate #corelation
-  Result[i-979,2,3] <-result$p.value #p-value  
+result <- cor.test(combinedForSum$hpa1m2,combinedForSum$ssa1m2, method = "pearson")
+Result[1,2] <-result$statistic #t-value  
+Result[2,2] <-result$estimate #corelation
+Result[3,2] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa1b2,combinedForSum$ssa1b2, method = "pearson")
+Result[1,3] <-result$statistic #t-value  
+Result[2,3] <-result$estimate #corelation
+Result[3,3] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa1b8,combinedForSum$ssa1b8, method = "pearson")
+Result[1,4] <-result$statistic #t-value  
+Result[2,4] <-result$estimate #corelation
+Result[3,4] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa1t6,combinedForSum$ssa1t6, method = "pearson")
+Result[1,5] <-result$statistic #t-value  
+Result[2,5] <-result$estimate #corelation
+Result[3,5] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa1b3,combinedForSum$ssa1b3, method = "pearson")
+Result[1,6] <-result$statistic #t-value  
+Result[2,6] <-result$estimate #corelation
+Result[3,6] <-result$p.value #p-value  
   
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa1b2, method = "pearson")
-  Result[i-979,3,1] <-result$statistic #t-value  
-  Result[i-979,3,2] <-result$estimate #corelation
-  Result[i-979,3,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa1b8, method = "pearson")
-  Result[i-979,4,1] <-result$statistic #t-value  
-  Result[i-979,4,2] <-result$estimate #corelation
-  Result[i-979,4,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa1t6, method = "pearson")
-  Result[i-979,5,1] <-result$statistic #t-value  
-  Result[i-979,5,2] <-result$estimate #corelation
-  Result[i-979,5,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa1b3, method = "pearson")
-  Result[i-979,6,1] <-result$statistic #t-value  
-  Result[i-979,6,2] <-result$estimate #corelation
-  Result[i-979,6,3] <-result$p.value #p-value  
-}
 
 colnames(Result) <-c("Effort", "Irritated", "Patient", "Interested", "Responsible", "Responsive")
-rownames (Result)<-c("around", "monitor", "keyboard", "face", "comp_only", "no_face","body_only","s_speak")
+rownames (Result)<-c("tval", "cor", "pval")
 print (Result)
 Sum_Overall <-Result
 
 Name <-paste(Threshhold,"f.csv",sep="")
-write.csv(Sum_Overall[,,1],paste(Path,paste("/Output/dyad1_ss_total_per_tval_",Name,sep=""),sep = ""))
-write.csv(Sum_Overall[,,2],paste(Path,paste("/Output/dyad1_ss_total_per_cor_",Name,sep=""),sep = ""))
-write.csv(Sum_Overall[,,3],paste(Path,paste("/Output/dyad1_ss_total_per_pval_",Name,sep=""),sep = ""))
+write.csv(Sum_Overall,paste(Path,paste("/Output/dyad1_hp_cor_ss",Name,sep=""),sep = ""))
 
 
 
@@ -165,49 +158,45 @@ combinedForSum <- merge(x=Rapport_Data, y=H_talk_Type_2_sum, by.x='hdyad', by.y=
 # row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
 # column: around, monitor, keyboard, face, componly, no face
 # depth: t-value, correlation, p-value
-Result <- array(numeric(),c(8,6,3))
-for (i in 980:987){
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa2t4, method = "pearson")
-  Result[i-979,1,1] <-result$statistic #t-value  
-  Result[i-979,1,2] <-result$estimate #corelation
-  Result[i-979,1,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa2m2, method = "pearson")
-  Result[i-979,2,1] <-result$statistic #t-value  
-  Result[i-979,2,2] <-result$estimate #corelation
-  Result[i-979,2,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa2b2, method = "pearson")
-  Result[i-979,3,1] <-result$statistic #t-value  
-  Result[i-979,3,2] <-result$estimate #corelation
-  Result[i-979,3,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa2b8, method = "pearson")
-  Result[i-979,4,1] <-result$statistic #t-value  
-  Result[i-979,4,2] <-result$estimate #corelation
-  Result[i-979,4,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa2t6, method = "pearson")
-  Result[i-979,5,1] <-result$statistic #t-value  
-  Result[i-979,5,2] <-result$estimate #corelation
-  Result[i-979,5,3] <-result$p.value #p-value  
-  
-  result <- cor.test(combinedForSum[,i],combinedForSum$ssa2b3, method = "pearson")
-  Result[i-979,6,1] <-result$statistic #t-value  
-  Result[i-979,6,2] <-result$estimate #corelation
-  Result[i-979,6,3] <-result$p.value #p-value  
-  
-}
+Result <- array(numeric(),c(3,6))
+result <- cor.test(combinedForSum$hpa2t4,combinedForSum$ssa2t4, method = "pearson")
+Result[1,1] <-result$statistic #t-value  
+Result[2,1] <-result$estimate #corelation
+Result[3,1] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa2m2,combinedForSum$ssa2m2, method = "pearson")
+Result[1,2] <-result$statistic #t-value  
+Result[2,2] <-result$estimate #corelation
+Result[3,2] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa2b2,combinedForSum$ssa2b2, method = "pearson")
+Result[1,3] <-result$statistic #t-value  
+Result[2,3] <-result$estimate #corelation
+Result[3,3] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa2b8,combinedForSum$ssa2b8, method = "pearson")
+Result[1,4] <-result$statistic #t-value  
+Result[2,4] <-result$estimate #corelation
+Result[3,4] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa2t6,combinedForSum$ssa2t6, method = "pearson")
+Result[1,5] <-result$statistic #t-value  
+Result[2,5] <-result$estimate #corelation
+Result[3,5] <-result$p.value #p-value  
+
+result <- cor.test(combinedForSum$hpa2b3,combinedForSum$ssa2b3, method = "pearson")
+Result[1,6] <-result$statistic #t-value  
+Result[2,6] <-result$estimate #corelation
+Result[3,6] <-result$p.value #p-value  
+
 
 colnames(Result) <-c("Effort", "Irritated", "Patient", "Interested", "Responsible", "Responsive")
-rownames (Result)<-c("around", "monitor", "keyboard", "face", "comp_only", "no_face","body_only","s_speak")
+rownames (Result)<-c("tval", "cor", "pval")
 print (Result)
 Sum_Overall <-Result
 
 Name <-paste(Threshhold,"f.csv",sep="")
-write.csv(Sum_Overall[,,1],paste(Path,paste("/Output/dyad2_ss_total_per_tval_",Name,sep=""),sep = ""))
-write.csv(Sum_Overall[,,2],paste(Path,paste("/Output/dyad2_ss_total_per_cor_",Name,sep=""),sep = ""))
-write.csv(Sum_Overall[,,3],paste(Path,paste("/Output/dyad2_ss_total_per_pval_",Name,sep=""),sep = ""))
+write.csv(Sum_Overall,paste(Path,paste("/Output/dyad2_hp_cor_ss",Name,sep=""),sep = ""))
 
 #face_gaze <- t.test(H_talk_Type_1_sum$S_Face_Per_Total,H_talk_Type_2_sum$S_Face_Per_Total)
 #around_gaze <- t.test(H_talk_Type_1_sum$S_Around_Per_Total,H_talk_Type_2_sum$S_Around_Per_Total)
