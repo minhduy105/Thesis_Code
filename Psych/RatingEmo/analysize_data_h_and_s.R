@@ -4,7 +4,7 @@ library(sm)
 #read the data-- change it to match with the path
 
 Path <- "D:/Thesis/Thesis_Code/Psych/RatingEmo/"
-Threshhold <-480
+Threshhold <-150
 
 H_talk <- read.csv(paste(Path,"DiscriptiveData_5talks_H_5mins.csv", sep=""))
 Rapport_Data <- read.csv(paste(Path,"personal trait data.csv", sep=""))
@@ -100,6 +100,18 @@ write.csv(H_talk_Type_2_sum,paste(Path,paste("/Output/dyad2_data_sum_",Name,sep=
 
 
 
+#-------------------------------adding the extra personal rating variable----------------------------------------#
+
+hpa1_comb <- Rapport_Data$hpa1b2 + Rapport_Data$hpa1t6
+hpa2_comb <- Rapport_Data$hpa2b2 + Rapport_Data$hpa2t6
+ssa1_comb <- Rapport_Data$ssa1b2 + Rapport_Data$ssa1t6
+ssa2_comb <- Rapport_Data$ssa2b2 + Rapport_Data$ssa2t6
+
+add_rating <- cbind(hpa1_comb,hpa2_comb,ssa1_comb,ssa2_comb)
+Rapport_Data <- cbind(Rapport_Data,add_rating)
+
+
+
 #----------------------------------------Stat test------------------------------------------------------------------#
 
 
@@ -108,7 +120,7 @@ write.csv(H_talk_Type_2_sum,paste(Path,paste("/Output/dyad2_data_sum_",Name,sep=
 
 combinedForSum <- merge(x=Rapport_Data, y=H_talk_Type_1_sum, by.x='hdyad', by.y='Group.1')
 
-Result <- array(numeric(),c(3,6))
+Result <- array(numeric(),c(3,7))
 result <- cor.test(combinedForSum$hpa1t4,combinedForSum$ssa1t4, method = "pearson")
 Result[1,1] <-result$statistic #t-value  
 Result[2,1] <-result$estimate #corelation
@@ -140,7 +152,12 @@ Result[2,6] <-result$estimate #corelation
 Result[3,6] <-result$p.value #p-value  
   
 
-colnames(Result) <-c("Effort", "Irritated", "Patient", "Interested", "Responsible", "Responsive")
+result <- cor.test(combinedForSum$hpa1_comb,combinedForSum$ssa1_comb, method = "pearson")
+Result[1,7] <-result$statistic #t-value  
+Result[2,7] <-result$estimate #corelation
+Result[3,7] <-result$p.value #p-value  
+
+colnames(Result) <-c("Effort", "Irritated", "Patient", "Interested", "Responsible", "Responsive", "Pat_Resposoble")
 rownames (Result)<-c("tval", "cor", "pval")
 print (Result)
 Sum_Overall <-Result
@@ -158,7 +175,7 @@ combinedForSum <- merge(x=Rapport_Data, y=H_talk_Type_2_sum, by.x='hdyad', by.y=
 # row: "hhogan","hboredom","hsdesirability","shogan","sboredom","ssdesirability","hpabad","hpabad2","hpagood","hpagood2","spabad","spabad2","spagood","spagood2","rapcomp2"
 # column: around, monitor, keyboard, face, componly, no face
 # depth: t-value, correlation, p-value
-Result <- array(numeric(),c(3,6))
+Result <- array(numeric(),c(3,7))
 result <- cor.test(combinedForSum$hpa2t4,combinedForSum$ssa2t4, method = "pearson")
 Result[1,1] <-result$statistic #t-value  
 Result[2,1] <-result$estimate #corelation
@@ -190,24 +207,16 @@ Result[2,6] <-result$estimate #corelation
 Result[3,6] <-result$p.value #p-value  
 
 
-colnames(Result) <-c("Effort", "Irritated", "Patient", "Interested", "Responsible", "Responsive")
+result <- cor.test(combinedForSum$hpa2_comb,combinedForSum$ssa2_comb, method = "pearson")
+Result[1,7] <-result$statistic #t-value  
+Result[2,7] <-result$estimate #corelation
+Result[3,7] <-result$p.value #p-value  
+
+
+colnames(Result) <-c("Effort", "Irritated", "Patient", "Interested", "Responsible", "Responsive", "Pat_Resposoble")
 rownames (Result)<-c("tval", "cor", "pval")
 print (Result)
 Sum_Overall <-Result
 
 Name <-paste(Threshhold,"f.csv",sep="")
 write.csv(Sum_Overall,paste(Path,paste("/Output/dyad2_hp_cor_ss",Name,sep=""),sep = ""))
-
-#face_gaze <- t.test(H_talk_Type_1_sum$S_Face_Per_Total,H_talk_Type_2_sum$S_Face_Per_Total)
-#around_gaze <- t.test(H_talk_Type_1_sum$S_Around_Per_Total,H_talk_Type_2_sum$S_Around_Per_Total)
-#monitor_gaze <- t.test(H_talk_Type_1_sum$S_Monitor_Per_Total,H_talk_Type_2_sum$S_Monitor_Per_Total)
-#keyboard_gaze <- t.test(H_talk_Type_1_sum$S_Keyboard_Per_Total,H_talk_Type_2_sum$S_Keyboard_Per_Total)
-#comn_gaze <- t.test(H_talk_Type_1_sum$S_CompOnly_Per_Total,H_talk_Type_2_sum$S_CompOnly_Per_Total)
-#body_gaze <- t.test(H_talk_Type_1_sum$S_BodyOnly_Per_Total,H_talk_Type_2_sum$S_BodyOnly_Per_Total)
-
-#face_gaze_cor <- cor.test(H_talk_Type_1_sum$S_Face_Per_Total,H_talk_Type_2_sum$S_Face_Per_Total, method = "pearson")
-#around_gaze_cor <- cor.test(H_talk_Type_1_sum$S_Around_Per_Total,H_talk_Type_2_sum$S_Around_Per_Total, method = "pearson")
-#monitor_gaze_cor <- cor.test(H_talk_Type_1_sum$S_Monitor_Per_Total,H_talk_Type_2_sum$S_Monitor_Per_Total, method = "pearson")
-#keyboard_gaze_cor <- cor.test(H_talk_Type_1_sum$S_Keyboard_Per_Total,H_talk_Type_2_sum$S_Keyboard_Per_Total, method = "pearson")
-#comn_gaze_cor <- cor.test(H_talk_Type_1_sum$S_CompOnly_Per_Total,H_talk_Type_2_sum$S_CompOnly_Per_Total, method = "pearson")
-#body_gaze_cor <- cor.test(H_talk_Type_1_sum$S_BodyOnly_Per_Total,H_talk_Type_2_sum$S_BodyOnly_Per_Total, method = "pearson")
