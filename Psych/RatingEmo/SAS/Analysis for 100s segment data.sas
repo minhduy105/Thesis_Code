@@ -166,6 +166,7 @@ proc sql;
 quit;
 
 /*------------------------------Running the T-Test------------------------------------------*/
+
 /*rename the collumn so it is less confused in the result section*/
 data Summary_1;
 	set WORK.Summary_1;
@@ -199,63 +200,41 @@ data Summary_at_200s;
 			MeanDurationFace = MeanDurationFace_at2;			
 run;
 
-/*Running the ttest between the sum*/
+/*Running the ttest between 0th start point and 200th start point for conversation 1*/
 
 proc ttest data=Summary_1 order=data
            alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
    where SectionStartTime in (0,200);
    class SectionStartTime;
-   var TotalDurationAround1;
+   var TotalDurationAround1 TotalDurationFace1 MeanDurationAround1 MeanDurationFace1;
 run;
 
-proc ttest data=Summary_1 order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime in (0,200);
-   class SectionStartTime;
-   var TotalDurationFace1;
-run;
-
+/*Running the ttest between 0th start point and 200th start point for conversation 2*/
 
 proc ttest data=Summary_2 order=data
            alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
    where SectionStartTime in (0,200);
    class SectionStartTime;
-   var TotalDurationAround2;
+   var TotalDurationAround2 TotalDurationFace2 MeanDurationAround2 MeanDurationFace2;
 run;
 
-proc ttest data=Summary_2 order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime in (0,200);
-   class SectionStartTime;
-   var TotalDurationFace2;
-run;
 
+/*Running the ttest between conversation 1 and conversation 2*/
 
 proc ttest data=Summary_at_0s order=data
            alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
    where SectionStartTime = 0;
    class Cov;
-   var TotalDurationAround_at0;
+   var TotalDurationAround_at0 TotalDurationFace_at0 MeanDurationAround_at0 MeanDurationFace_at0;
 run;
 
-proc ttest data=Summary_at_0s order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime = 0;
-   class Cov;
-   var TotalDurationFace_at0;
-run;
-
-proc ttest data=Summary_at_0s order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime = 200;
-   class Cov;
-   var TotalDurationAround_at2;
-run;
 
 proc ttest data=Summary_at_200s order=data
            alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
    where SectionStartTime = 200;
    class Cov;
-   var TotalDurationFace_at2;
+   var TotalDurationAround_at2 TotalDurationFace_at2 MeanDurationAround_at2 MeanDurationFace_at2;
 run;
 
+
+/*IDEA: Multiple Regression with the difference between 0s and 200s in both conversation*/
