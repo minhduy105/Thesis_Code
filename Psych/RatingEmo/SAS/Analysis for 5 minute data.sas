@@ -1,4 +1,4 @@
-/*For the boxplot, need to be version 9.3 or above to run*/
+/*For the "fancy" graph at the end, need to be version 9.4 or above to run*/
 
 libname sql 'SAS-library';
 FILENAME REFFILE '/folders/myfolders/gaze analysys/DiscriptiveData_4gazes_100sec.csv';
@@ -195,7 +195,8 @@ proc means data=Summary n mean max min range std fw=8; /*fw is field width, whic
 		FrequencyMonitor1 FrequencyMonitor2 FrequencyKeyboard1 FrequencyKeyboard2;
    title 'Summary of Frequency of gaze in 4 categories and 2 conversation';
 run;
-/*------------------------------Running the T-Test------------------------------------------*/
+
+/*-------------------------Running the Paired T-Test for gazes between conversation------------------------------------------*/
 proc ttest data=Summary order=data
            alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
    paired TotalDurationAround1*TotalDurationAround2 TotalDurationFace1*TotalDurationFace2
@@ -206,17 +207,46 @@ run;
 
 /*------------------------------Running the Correlation Test------------------------------------------*/
 proc corr data=Summary;
-	var TotalDurationAround1 TotalDurationFace1 TotalDurationMonitor1 TotalDurationKeyboard1;
-	with TotalDurationAround2 TotalDurationFace2 TotalDurationMonitor2 TotalDurationKeyboard2;
+	var TotalDurationAround1 ;
+	with TotalDurationAround2 ;
 run;
 
 proc corr data=Summary;
-	var MeanDurationAround1 MeanDurationFace1 MeanDurationMonitor1 MeanDurationKeyboard1;
-	with MeanDurationAround2 MeanDurationFace2 MeanDurationMonitor2 MeanDurationKeyboard2;
+	var TotalDurationFace1 ;
+	with TotalDurationFace2 ;
 run;
 
+proc corr data=Summary;
+	var TotalDurationMonitor1 ;
+	with TotalDurationMonitor2 ;
+run;
 
-/*------------------------Draw plot-box (TESTING)------------------------------------------*/
+proc corr data=Summary;
+	var TotalDurationKeyboard1;
+	with TotalDurationKeyboard2;
+run;
+
+proc corr data=Summary;
+	var MeanDurationAround1 ;
+	with MeanDurationAround2 ;
+run;
+
+proc corr data=Summary;
+	var MeanDurationFace1 ;
+	with MeanDurationFace2 ;
+run;
+
+proc corr data=Summary;
+	var MeanDurationMonitor1 ;
+	with MeanDurationMonitor2 ;
+run;
+
+proc corr data=Summary;
+	var MeanDurationKeyboard1;
+	with MeanDurationKeyboard2;
+run;
+
+/*--------------------------------Draw plot-box -----------------------------------------------------*/
 /*create new column in order to create new table for doing box-plot */
 proc sql; /*adding new column*/
       alter table Summary
@@ -233,7 +263,8 @@ quit;
 
 proc sql;/*create new table for box-plot*/
 create table Summary_box_plot as 
-	select AroundID as GazeType, Cov1 as Conversation,TotalDurationAround1 as TotalDuration, MeanDurationAround1 as MeanDuration from Summary
+	select AroundID as GazeType, Cov1 as Conversation,
+			TotalDurationAround1 as TotalDuration, MeanDurationAround1 as MeanDuration from Summary
 	union
 	select AroundID,Cov2, TotalDurationAround2 , MeanDurationAround2  from Summary
 	union
@@ -264,7 +295,7 @@ proc sgplot data=Summary_box_plot;
   run;
 
 
-/*-------------------------Draw histogram plot----------------------------------*/
+/*--------------------------------------Draw histogram plot-------------------------------------------*/
 title 'Histogram for Total Around Gaze with kernel fitting Conversation 1 and 2';
 proc sgplot data=Summary_box_plot;
 	where GazeType in ("Around");       /* restrict to two groups */
@@ -279,6 +310,20 @@ proc sgplot data=Summary_box_plot;
 	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
 run;
 
+title 'Histogram for Total Monitor Gaze with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Monitor");       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Keyboard Gaze with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Key");       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
 title 'Histogram for Total Around Gaze and Total Face Gaze with kernel fitting in Conversation 1';
 proc sgplot data=Summary_box_plot;
 	where GazeType in ("Around","Face") and Conversation in ("Con1");       /* restrict to two groups */
@@ -288,7 +333,7 @@ run;
 
 title 'Histogram for Total Around Gaze and Total Face Gaze with kernel fitting in Conversation 2';
 proc sgplot data=Summary_box_plot;
-	where GazeType in ("Around","Face") and Conversation in ("Con1");       /* restrict to two groups */
+	where GazeType in ("Around","Face") and Conversation in ("Con2");       /* restrict to two groups */
 	histogram TotalDuration / group=GazeType transparency=0.5;       /* SAS 9.4m2 */
 	density TotalDuration / type= kernel group=GazeType;/* overlay density estimates */
 run;
@@ -307,6 +352,21 @@ proc sgplot data=Summary_box_plot;
 	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
 run;
 
+title 'Histogram for Mean Monitor Gaze with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Monitor");       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Keyboard Gaze with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Key");       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+
 title 'Histogram for Mean Around Gaze and Mean Face Gaze with kernel fitting in Conversation 1';
 proc sgplot data=Summary_box_plot;
 	where GazeType in ("Around","Face") and Conversation in ("Con1");       /* restrict to two groups */
@@ -316,7 +376,7 @@ run;
 
 title 'Histogram for Mean Around Gaze and Mean Face Gaze with kernel fitting in Conversation 2';
 proc sgplot data=Summary_box_plot;
-	where GazeType in ("Around","Face") and Conversation in ("Con1");       /* restrict to two groups */
+	where GazeType in ("Around","Face") and Conversation in ("Con2");       /* restrict to two groups */
 	histogram MeanDuration / group=GazeType transparency=0.5;       /* SAS 9.4m2 */
 	density MeanDuration / type= kernel group=GazeType;/* overlay density estimates */
 run;
