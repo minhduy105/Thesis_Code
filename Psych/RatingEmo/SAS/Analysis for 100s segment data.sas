@@ -8,7 +8,6 @@ RUN;
 
 PROC CONTENTS DATA=WORK.IMPORT; RUN;
 
-
 /* -----------------get data for conversation 1-----------------------*/
 data Gaze1;
    set WORK.IMPORT (keep = Dyad Cov SectionStartTime Duration GazeType);
@@ -16,72 +15,123 @@ data Gaze1;
 run;
 
 
-/*Get the total, mean, and frequency of the four gaze*/
+/*
+Get the total, mean, and frequency of the four gaze
+Divide to 30.0 to get the time in second
 
-/*divide to 30.0 to get the time in second*/
-proc sql; /*Get the "Cov" column so we can add two table back together*/
-	create table Around_1 as
-   	select Dyad, SectionStartTime /30.0 as SectionStartTime,
-   		sum(Duration) / 30.0 as TotalDurationAround,
-   		mean(Duration) / 30.0 as MeanDurationAround,
-   		count(*) as FrequencyAround
+Gaze Type ID:
+Around = 1
+Monitor = 2
+Keyboard = 3
+Face = 4
+*/
+
+/*---------------------------get the gaze data for the first 100 seconds----------------------------*/
+proc sql; 
+	create table Around_1_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationAround1_0s,
+   		mean(Duration) / 30.0 as MeanDurationAround1_0s,
+   		count(*) as FrequencyAround1_0s
 		from WORK.Gaze1
-		where GazeType = 1
-		group by Dyad, SectionStartTime;
+		where GazeType = 1 and SectionStartTime = 0
+		group by Dyad;
 quit;
 
 proc sql;
-	create table Monitor_1 as
-   	select Dyad, SectionStartTime /30.0 as SectionStartTime,
-		sum(Duration) / 30.0 as TotalDurationMonitor,
-   		mean(Duration) / 30.0 as MeanDurationMonitor,
-   		count(*) as FrequencyMonitor
+	create table Monitor_1_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationMonitor1_0s,
+   		mean(Duration) / 30.0 as MeanDurationMonitor1_0s,
+   		count(*) as FrequencyMonitor1_0s
 		from WORK.Gaze1
-		where GazeType = 2
-		group by Dyad, SectionStartTime;
+		where GazeType = 2 and SectionStartTime = 0
+		group by Dyad;
 quit;
 
 proc sql;
-	create table Keyboard_1 as
-   	select Dyad, SectionStartTime /30.0 as SectionStartTime,
-		sum(Duration) / 30.0 as TotalDurationKeyboard,
-   		mean(Duration) / 30.0 as MeanDurationKeyboard,
-   		count(*) as FrequencyKeyboard
+	create table Keyboard_1_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationKeyboard1_0s,
+   		mean(Duration) / 30.0 as MeanDurationKeyboard1_0s,
+   		count(*) as FrequencyKeyboard1_0s
 		from WORK.Gaze1
-		where GazeType = 3
-		group by Dyad, SectionStartTime;
+		where GazeType = 3 and SectionStartTime = 0
+		group by Dyad;
 quit;
 
 proc sql;
-	create table Face_1 as
-   	select Dyad, Cov, SectionStartTime /30.0 as SectionStartTime,
-		sum(Duration) / 30.0 as TotalDurationFace,
-   		mean(Duration) / 30.0 as MeanDurationFace,
-   		count(*) as FrequencyFace
+	create table Face_1_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationFace1_0s,
+   		mean(Duration) / 30.0 as MeanDurationFace1_0s,
+   		count(*) as FrequencyFace1_0s
 		from WORK.Gaze1
-		where GazeType = 4
-		group by Dyad, Cov, SectionStartTime;
+		where GazeType = 4 and SectionStartTime = 0
+		group by Dyad;
 quit;
+
+/*---------------------------get the gaze data for the last 100 seconds----------------------------*/
+proc sql; 
+	create table Around_1_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationAround1_200s,
+   		mean(Duration) / 30.0 as MeanDurationAround1_200s,
+   		count(*) as FrequencyAround1_200s
+		from WORK.Gaze1
+		where GazeType = 1 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
+proc sql;
+	create table Monitor_1_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationMonitor1_200s,
+   		mean(Duration) / 30.0 as MeanDurationMonitor1_200s,
+   		count(*) as FrequencyMonitor1_200s
+		from WORK.Gaze1
+		where GazeType = 2 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
+proc sql;
+	create table Keyboard_1_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationKeyboard1_200s,
+   		mean(Duration) / 30.0 as MeanDurationKeyboard1_200s,
+   		count(*) as FrequencyKeyboard1_200s
+		from WORK.Gaze1
+		where GazeType = 3 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
+proc sql;
+	create table Face_1_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationFace1_200s,
+   		mean(Duration) / 30.0 as MeanDurationFace1_200s,
+   		count(*) as FrequencyFace1_200s
+		from WORK.Gaze1
+		where GazeType = 4 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
 
 /*Join all the gaze data together*/
 proc sql;
 	create table Summary_1 as 
-	select F.*, M.*, K.*, A.* 
-		from WORK.Face_1 F	
-		full join WORK.Monitor_1 M on (F.Dyad = M.Dyad and F.SectionStartTime = M.SectionStartTime) 
-		full join WORK.Keyboard_1 K on (F.Dyad = K.Dyad and F.SectionStartTime = K.SectionStartTime)
-		full join WORK.Around_1 A on (F.Dyad = A.Dyad and F.SectionStartTime = A.SectionStartTime);
+	select F0.*, M0.*, K0.*, A0.*, F2.*, M2.*, K2.*, A2.* 
+		from WORK.Face_1_0s F0	
+		full join WORK.Monitor_1_0s M0 on F0.Dyad = M0.Dyad
+		full join WORK.Keyboard_1_0s K0 on F0.Dyad = K0.Dyad
+		full join WORK.Around_1_0s A0 on F0.Dyad = A0.Dyad
+
+		full join WORK.Face_1_200s F2 on F0.Dyad = F2.Dyad
+		full join WORK.Monitor_1_200s M2 on F0.Dyad = M2.Dyad
+		full join WORK.Keyboard_1_200s K2 on F0.Dyad = K2.Dyad
+		full join WORK.Around_1_200s A2 on F0.Dyad = A2.Dyad;
 quit;	
 
-/*set all the null value to 0, such as Hawking do not look at the keyboard the whole time in dyad 8 and 44*/
+/*set all the null value to 0*/
 data Summary_1;
-	set Summary_1;
-	array a(*) _numeric_;
-	do i=1 to dim(a);
+	set Summary_1; /*read an observation (row)*/
+	array a(*) _numeric_; /*turm the row into an array*/
+	do i=1 to dim(a); /*go through the array, find and change null to 0*/
 	if a(i) = . then a(i) = 0;
 	end;
 	drop i;
-
 /* -----------------get data for conversation 2-----------------------*/
 data Gaze2;
    set WORK.IMPORT (keep = Dyad Cov SectionStartTime Duration GazeType);
@@ -89,152 +139,266 @@ data Gaze2;
 run;
 
 
-/*Get the total, mean, and frequency of the four gaze*/
+/*
+Get the total, mean, and frequency of the four gaze
+Divide to 30.0 to get the time in second
 
-/*divide to 30.0 to get the time in second*/
-proc sql; /*Get the "Cov" column so we can add two table back together*/
-	create table Around_2 as
-   	select Dyad, SectionStartTime /30.0 as SectionStartTime,
-   		sum(Duration) / 30.0 as TotalDurationAround,
-   		mean(Duration) / 30.0 as MeanDurationAround,
-   		count(*) as FrequencyAround
+Gaze Type ID:
+Around = 1
+Monitor = 2
+Keyboard = 3
+Face = 4
+*/
+
+/*---------------------------get the gaze data for the first 100 seconds----------------------------*/
+proc sql; 
+	create table Around_2_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationAround2_0s,
+   		mean(Duration) / 30.0 as MeanDurationAround2_0s,
+   		count(*) as FrequencyAround2_0s
 		from WORK.Gaze2
-		where GazeType = 1
-		group by Dyad, SectionStartTime;
+		where GazeType = 1 and SectionStartTime = 0
+		group by Dyad;
 quit;
 
 proc sql;
-	create table Monitor_2 as
-   	select Dyad, SectionStartTime /30.0 as SectionStartTime,
-		sum(Duration) / 30.0 as TotalDurationMonitor,
-   		mean(Duration) / 30.0 as MeanDurationMonitor,
-   		count(*) as FrequencyMonitor
+	create table Monitor_2_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationMonitor2_0s,
+   		mean(Duration) / 30.0 as MeanDurationMonitor2_0s,
+   		count(*) as FrequencyMonitor2_0s
 		from WORK.Gaze2
-		where GazeType = 2
-		group by Dyad, SectionStartTime;
+		where GazeType = 2 and SectionStartTime = 0
+		group by Dyad;
 quit;
 
 proc sql;
-	create table Keyboard_2 as
-   	select Dyad, SectionStartTime /30.0 as SectionStartTime,
-		sum(Duration) / 30.0 as TotalDurationKeyboard,
-   		mean(Duration) / 30.0 as MeanDurationKeyboard,
-   		count(*) as FrequencyKeyboard
+	create table Keyboard_2_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationKeyboard2_0s,
+   		mean(Duration) / 30.0 as MeanDurationKeyboard2_0s,
+   		count(*) as FrequencyKeyboard2_0s
 		from WORK.Gaze2
-		where GazeType = 3
-		group by Dyad, SectionStartTime;
+		where GazeType = 3 and SectionStartTime = 0
+		group by Dyad;
 quit;
 
 proc sql;
-	create table Face_2 as
-   	select Dyad, Cov, SectionStartTime /30.0 as SectionStartTime,
-		sum(Duration) / 30.0 as TotalDurationFace,
-   		mean(Duration) / 30.0 as MeanDurationFace,
-   		count(*) as FrequencyFace
+	create table Face_2_0s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationFace2_0s,
+   		mean(Duration) / 30.0 as MeanDurationFace2_0s,
+   		count(*) as FrequencyFace2_0s
 		from WORK.Gaze2
-		where GazeType = 4
-		group by Dyad, Cov, SectionStartTime;
+		where GazeType = 4 and SectionStartTime = 0
+		group by Dyad;
 quit;
+
+/*---------------------------get the gaze data for the last 100 seconds----------------------------*/
+proc sql; 
+	create table Around_2_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationAround2_200s,
+   		mean(Duration) / 30.0 as MeanDurationAround2_200s,
+   		count(*) as FrequencyAround2_200s
+		from WORK.Gaze2
+		where GazeType = 1 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
+proc sql;
+	create table Monitor_2_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationMonitor2_200s,
+   		mean(Duration) / 30.0 as MeanDurationMonitor2_200s,
+   		count(*) as FrequencyMonitor2_200s
+		from WORK.Gaze2
+		where GazeType = 2 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
+proc sql;
+	create table Keyboard_2_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationKeyboard2_200s,
+   		mean(Duration) / 30.0 as MeanDurationKeyboard2_200s,
+   		count(*) as FrequencyKeyboard2_200s
+		from WORK.Gaze2
+		where GazeType = 3 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
+proc sql;
+	create table Face_2_200s as
+   	select Dyad, sum(Duration) / 30.0 as TotalDurationFace2_200s,
+   		mean(Duration) / 30.0 as MeanDurationFace2_200s,
+   		count(*) as FrequencyFace2_200s
+		from WORK.Gaze2
+		where GazeType = 4 and SectionStartTime = 6000
+		group by Dyad;
+quit;
+
 
 /*Join all the gaze data together*/
 proc sql;
 	create table Summary_2 as 
-	select F.*, M.*, K.*, A.* 
-		from WORK.Face_2 F	
-		full join WORK.Monitor_2 M on (F.Dyad = M.Dyad and F.SectionStartTime = M.SectionStartTime) 
-		full join WORK.Keyboard_2 K on (F.Dyad = K.Dyad and F.SectionStartTime = K.SectionStartTime)
-		full join WORK.Around_2 A on (F.Dyad = A.Dyad and F.SectionStartTime = A.SectionStartTime);
+	select F0.*, M0.*, K0.*, A0.*, F2.*, M2.*, K2.*, A2.* 
+		from WORK.Face_2_0s F0	
+		full join WORK.Monitor_2_0s M0 on F0.Dyad = M0.Dyad
+		full join WORK.Keyboard_2_0s K0 on F0.Dyad = K0.Dyad
+		full join WORK.Around_2_0s A0 on F0.Dyad = A0.Dyad
+
+		full join WORK.Face_2_200s F2 on F0.Dyad = F2.Dyad
+		full join WORK.Monitor_2_200s M2 on F0.Dyad = M2.Dyad
+		full join WORK.Keyboard_2_200s K2 on F0.Dyad = K2.Dyad
+		full join WORK.Around_2_200s A2 on F0.Dyad = A2.Dyad;
 quit;	
 
-/*set all the null value to 0, such as Hawking do not look at the keyboard the whole time in dyad 8 and 44*/
+/*set all the null value to 0*/
 data Summary_2;
-	set Summary_2;
-	array a(*) _numeric_;
-	do i=1 to dim(a);
+	set Summary_2; /*read an observation (row)*/
+	array a(*) _numeric_; /*turm the row into an array*/
+	do i=1 to dim(a); /*go through the array, find and change null to 0*/
 	if a(i) = . then a(i) = 0;
 	end;
 	drop i;
 	
-
 /*Combine dyad 1 and dyad 2 together*/
 
 proc sql;
-   create table Summary as
-      select * from Summary_1
-      union
-      select * from Summary_2;
+	create table Summary as 
+	select D1.*, D2.* 
+		from WORK.Summary_1 D1	
+		full join WORK.Summary_2 D2 on D1.Dyad = D2.Dyad;
+quit;	
+
+/*--------------------------------------Summary of the data-------------------------------------------*/
+
+proc means data=Summary n mean max min range std fw=8; /*fw is field width, which is how big the table is gonna be*/
+   var TotalDurationAround1_0s TotalDurationAround1_200s TotalDurationAround2_0s TotalDurationAround2_200s 
+   		TotalDurationFace1_0s TotalDurationFace1_200s TotalDurationFace2_0s TotalDurationFace2_200s;
+   title 'Summary of Total gaze time in 4 categories and 2 conversation';
+run;
+
+proc means data=Summary n mean max min range std fw=8; /*fw is field width, which is how big the table is gonna be*/
+   var MeanDurationAround1_0s MeanDurationAround1_200s MeanDurationAround2_0s MeanDurationAround2_200s 
+   		MeanDurationFace1_0s MeanDurationFace1_200s MeanDurationFace2_0s MeanDurationFace2_200s;
+   title 'Summary of Mean gaze time in 4 categories and 2 conversation';
+run;
+
+proc means data=Summary n mean max min range std fw=8; /*fw is field width, which is how big the table is gonna be*/
+   var FrequencyAround1_0s FrequencyAround1_200s FrequencyAround2_0s FrequencyAround2_200s 
+   		FrequencyFace1_0s FrequencyFace1_200s FrequencyFace2_0s FrequencyFace2_200s;
+   title 'Summary of Frequency of gaze in 4 categories and 2 conversation';
+run;
+
+/*-------------------------Running the Paired T-Test for gazes between conversation------------------------------------------*/
+proc ttest data=Summary order=data
+           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
+   paired TotalDurationAround1_0s*TotalDurationAround1_200s
+   			TotalDurationAround2_0s*TotalDurationAround2_200s
+   			TotalDurationAround1_0s*TotalDurationAround2_0s
+   			TotalDurationAround1_200s*TotalDurationAround2_200s
+   		
+   			TotalDurationFace1_0s*TotalDurationFace1_200s
+   			TotalDurationFace2_0s*TotalDurationFace2_200s
+   			TotalDurationFace1_0s*TotalDurationFace2_0s
+   			TotalDurationFace1_200s*TotalDurationFace2_200s
+   			
+			MeanDurationAround1_0s*MeanDurationAround1_200s 
+			MeanDurationAround2_0s*MeanDurationAround2_200s
+			MeanDurationAround1_0s*MeanDurationAround2_0s
+			MeanDurationAround1_200s*MeanDurationAround2_200s
+			
+			MeanDurationFace1_0s*MeanDurationFace1_200s
+			MeanDurationFace2_0s*MeanDurationFace2_200s
+			MeanDurationFace1_0s*MeanDurationFace2_0s
+			MeanDurationFace1_200s*MeanDurationFace2_200s;
+run;
+
+/*------------------------------Running the Correlation Test------------------------------------------*/
+proc corr data=Summary;
+	var TotalDurationAround1_0s TotalDurationAround2_200s ;
+	with TotalDurationAround1_200s TotalDurationAround2_0s ;
+run;
+
+proc corr data=Summary;
+	var TotalDurationFace1_0s TotalDurationFace2_200s ;
+	with TotalDurationFace1_200s TotalDurationFace2_0s ;
+run;
+
+proc corr data=Summary;
+	var MeanDurationAround1_0s MeanDurationAround2_200s ;
+	with MeanDurationAround1_200s MeanDurationAround2_0s ;
+run;
+
+proc corr data=Summary;
+	var MeanDurationFace1_0s MeanDurationFace2_200s ;
+	with MeanDurationFace1_200s MeanDurationFace2_0s ;
+run;
+
+/*--------------------------------Draw plot-box -----------------------------------------------------*/
+/*create new column in order to create new table for doing box-plot */
+proc sql; /*adding new column*/
+      alter table Summary
+      ADD AroundID char format = $6.
+      ADD FaceID char format = $4.
+      ADD MonitorID char format = $7.
+      ADD KeyboardID char format = $3.
+      ADD Cov1 char format = $4.
+      ADD Cov2 char format = $4.
+      ADD TimeStart0 char format = $2.
+      ADD TimeStart2 char format = $4.;
+   update Summary
+   set AroundID='Around', FaceID='Face', MonitorID='Monitor', KeyboardID='Key',
+	   Cov1 = 'Con1', Cov2 = 'Con2',
+	   TimeStart0 = '0s', TimeStart2 = '200s' ; /*set initial values for those column*/
 quit;
 
-/*------------------------------Running the T-Test------------------------------------------*/
+proc sql;/*create new table for box-plot*/
+create table Summary_box_plot as 
+	select AroundID as GazeType, Cov1 as Conversation, TimeStart0 as TimeStart,
+			TotalDurationAround1_0s as TotalDuration, MeanDurationAround1_0s as MeanDuration from Summary
+	union
+	select AroundID, Cov1, TimeStart2, TotalDurationAround1_200s, MeanDurationAround1_200s  from Summary
+	union
+	select AroundID, Cov2, TimeStart0, TotalDurationAround2_0s, MeanDurationAround2_0s  from Summary
+	union
+	select AroundID, Cov2, TimeStart2, TotalDurationAround2_200s, MeanDurationAround2_200s  from Summary
+	union
 
-/*rename the collumn so it is less confused in the result section*/
-data Summary_1;
-	set WORK.Summary_1;
-	rename TotalDurationAround = TotalDurationAround1
-			TotalDurationFace = TotalDurationFace1
-			MeanDurationAround = MeanDurationAround1
-			MeanDurationFace = MeanDurationFace1;			
-run;
+	select FaceID,Cov1, TimeStart0, TotalDurationFace1_0s , MeanDurationFace1_0s  from Summary
+	union
+	select FaceID,Cov1, TimeStart2, TotalDurationFace1_200s , MeanDurationFace1_200s  from Summary
+	union
+	select FaceID,Cov2, TimeStart0, TotalDurationFace2_0s , MeanDurationFace2_0s  from Summary
+	union
+	select FaceID,Cov2, TimeStart2, TotalDurationFace2_200s , MeanDurationFace2_200s  from Summary
+;
+quit;
 
-data Summary_2;
-	set WORK.Summary_2;
-	rename TotalDurationAround = TotalDurationAround2
-			TotalDurationFace = TotalDurationFace2
-			MeanDurationAround = MeanDurationAround2
-			MeanDurationFace = MeanDurationFace2;
-run;
-
-data Summary_at_0s;
-	set WORK.Summary;
-	rename TotalDurationAround = TotalDurationAround_at0
-			TotalDurationFace = TotalDurationFace_at0
-			MeanDurationAround = MeanDurationAround_at0
-			MeanDurationFace = MeanDurationFace_at0;			
-run;
-
-data Summary_at_200s;
-	set WORK.Summary;
-	rename TotalDurationAround = TotalDurationAround_at2
-			TotalDurationFace = TotalDurationFace_at2
-			MeanDurationAround = MeanDurationAround_at2
-			MeanDurationFace = MeanDurationFace_at2;			
-run;
-
-/*Running the ttest between 0th start point and 200th start point for conversation 1*/
-
-proc ttest data=Summary_1 order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime in (0,200);
-   class SectionStartTime;
-   var TotalDurationAround1 TotalDurationFace1 MeanDurationAround1 MeanDurationFace1;
-run;
-
-/*Running the ttest between 0th start point and 200th start point for conversation 2*/
-
-proc ttest data=Summary_2 order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime in (0,200);
-   class SectionStartTime;
-   var TotalDurationAround2 TotalDurationFace2 MeanDurationAround2 MeanDurationFace2;
+data Summary_box_plot;
+   set Summary_box_plot;
+   ConvTime=catx('_at_', of Conversation, TimeStart );
 run;
 
 
-/*Running the ttest between conversation 1 and conversation 2*/
-
-proc ttest data=Summary_at_0s order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime = 0;
-   class Cov;
-   var TotalDurationAround_at0 TotalDurationFace_at0 MeanDurationAround_at0 MeanDurationFace_at0;
-run;
+title 'Box Plot for Total Duration of Face Gaze and Around Gaze in Conversation 1 and 2 (v1)';
+proc sgplot data=Summary_box_plot;
+  vbox TotalDuration / category=ConvTime group=GazeType groupdisplay=cluster;
+  YAXIS LABEL = 'Total Duration (seconds)';
+  run;
 
 
-proc ttest data=Summary_at_200s order=data
-           alpha=0.05 test=diff sides=2; /* two-sided test of diff between group means */
-   where SectionStartTime = 200;
-   class Cov;
-   var TotalDurationAround_at2 TotalDurationFace_at2 MeanDurationAround_at2 MeanDurationFace_at2;
-run;
+title 'Box Plot for Mean Duration of Face Gaze and Around Gaze in Conversation 1 and 2 (v1)';
+proc sgplot data=Summary_box_plot;
+  vbox MeanDuration / category=ConvTime group=GazeType groupdisplay=cluster;
+  YAXIS LABEL = 'Total Duration (seconds)';
+  run;
+
+title 'Box Plot for Total Duration of Face Gaze and Around Gaze in Conversation 1 and 2 (v2)';
+proc sgplot data=Summary_box_plot;
+  vbox TotalDuration / category=GazeType group=ConvTime groupdisplay=cluster;
+  YAXIS LABEL = 'Total Duration (seconds)';
+  run;
 
 
-/*IDEA: Multiple Regression with the difference between 0s and 200s in both conversation*/
+title 'Box Plot for Mean Duration of Face Gaze and Around Gaze in Conversation 1 and 2 (v2)';
+proc sgplot data=Summary_box_plot;
+  vbox MeanDuration / category=GazeType group=ConvTime groupdisplay=cluster;
+  YAXIS LABEL = 'Total Duration (seconds)';
+  run;
