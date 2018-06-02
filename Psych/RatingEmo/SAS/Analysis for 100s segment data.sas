@@ -292,44 +292,66 @@ proc ttest data=Summary order=data
    paired TotalDurationAround1_0s*TotalDurationAround1_200s
    			TotalDurationAround2_0s*TotalDurationAround2_200s
    			TotalDurationAround1_0s*TotalDurationAround2_0s
+			TotalDurationAround1_200s*TotalDurationAround2_0s
    			TotalDurationAround1_200s*TotalDurationAround2_200s
    		
    			TotalDurationFace1_0s*TotalDurationFace1_200s
    			TotalDurationFace2_0s*TotalDurationFace2_200s
    			TotalDurationFace1_0s*TotalDurationFace2_0s
+   			TotalDurationFace1_200s*TotalDurationFace2_0s
    			TotalDurationFace1_200s*TotalDurationFace2_200s
    			
 			MeanDurationAround1_0s*MeanDurationAround1_200s 
 			MeanDurationAround2_0s*MeanDurationAround2_200s
 			MeanDurationAround1_0s*MeanDurationAround2_0s
+			MeanDurationAround1_200s*MeanDurationAround2_0s
 			MeanDurationAround1_200s*MeanDurationAround2_200s
 			
 			MeanDurationFace1_0s*MeanDurationFace1_200s
 			MeanDurationFace2_0s*MeanDurationFace2_200s
 			MeanDurationFace1_0s*MeanDurationFace2_0s
-			MeanDurationFace1_200s*MeanDurationFace2_200s;
+			MeanDurationFace1_200s*MeanDurationFace2_0s
+			MeanDurationFace1_200s*MeanDurationFace2_200s
+			
+			FrequencyAround1_0s*FrequencyAround1_200s 
+			FrequencyAround2_0s*FrequencyAround2_200s
+			FrequencyAround1_0s*FrequencyAround2_0s
+			FrequencyAround1_200s*FrequencyAround2_0s
+			FrequencyAround1_200s*FrequencyAround2_200s
+			
+			FrequencyFace1_0s*FrequencyFace1_200s 
+			FrequencyFace2_0s*FrequencyFace2_200s
+			FrequencyFace1_0s*FrequencyFace2_0s
+			FrequencyFace1_200s*FrequencyFace2_0s
+			FrequencyFace1_200s*FrequencyFace2_200s
+			;
 run;
 
 /*------------------------------Running the Correlation Test------------------------------------------*/
 proc corr data=Summary;
-	var TotalDurationAround1_0s TotalDurationAround2_200s ;
-	with TotalDurationAround1_200s TotalDurationAround2_0s ;
+	var TotalDurationAround1_0s TotalDurationAround1_200s TotalDurationAround2_0s TotalDurationAround2_200s ;
 run;
 
 proc corr data=Summary;
-	var TotalDurationFace1_0s TotalDurationFace2_200s ;
-	with TotalDurationFace1_200s TotalDurationFace2_0s ;
+	var TotalDurationFace1_0s TotalDurationFace1_200s TotalDurationFace2_0s TotalDurationFace2_200s ;
 run;
 
 proc corr data=Summary;
-	var MeanDurationAround1_0s MeanDurationAround2_200s ;
-	with MeanDurationAround1_200s MeanDurationAround2_0s ;
+	var MeanDurationAround1_0s MeanDurationAround1_200s MeanDurationAround2_0s MeanDurationAround2_200s ;
 run;
 
 proc corr data=Summary;
-	var MeanDurationFace1_0s MeanDurationFace2_200s ;
-	with MeanDurationFace1_200s MeanDurationFace2_0s ;
+	var MeanDurationFace1_0s MeanDurationFace1_200s MeanDurationFace2_0s MeanDurationFace2_200s ;
 run;
+
+proc corr data=Summary;
+	var FrequencyAround1_0s FrequencyAround1_200s FrequencyAround2_0s FrequencyAround2_200s ;
+run;
+
+proc corr data=Summary;
+	var FrequencyFace1_0s FrequencyFace1_200s FrequencyFace2_0s FrequencyFace2_200s ;
+run;
+
 
 /*--------------------------------Draw plot-box -----------------------------------------------------*/
 /*create new column in order to create new table for doing box-plot */
@@ -352,22 +374,23 @@ quit;
 proc sql;/*create new table for box-plot*/
 create table Summary_box_plot as 
 	select AroundID as GazeType, Cov1 as Conversation, TimeStart0 as TimeStart,
-			TotalDurationAround1_0s as TotalDuration, MeanDurationAround1_0s as MeanDuration from Summary
+			TotalDurationAround1_0s as TotalDuration, MeanDurationAround1_0s as MeanDuration,
+			FrequencyAround1_0s as Frequency from Summary
 	union
-	select AroundID, Cov1, TimeStart2, TotalDurationAround1_200s, MeanDurationAround1_200s  from Summary
+	select AroundID, Cov1, TimeStart2, TotalDurationAround1_200s, MeanDurationAround1_200s, FrequencyAround1_200s  from Summary
 	union
-	select AroundID, Cov2, TimeStart0, TotalDurationAround2_0s, MeanDurationAround2_0s  from Summary
+	select AroundID, Cov2, TimeStart0, TotalDurationAround2_0s, MeanDurationAround2_0s, FrequencyAround2_0s  from Summary
 	union
-	select AroundID, Cov2, TimeStart2, TotalDurationAround2_200s, MeanDurationAround2_200s  from Summary
+	select AroundID, Cov2, TimeStart2, TotalDurationAround2_200s, MeanDurationAround2_200s, FrequencyAround2_200s  from Summary
 	union
 
-	select FaceID,Cov1, TimeStart0, TotalDurationFace1_0s , MeanDurationFace1_0s  from Summary
+	select FaceID,Cov1, TimeStart0, TotalDurationFace1_0s , MeanDurationFace1_0s, FrequencyFace1_0s  from Summary
 	union
-	select FaceID,Cov1, TimeStart2, TotalDurationFace1_200s , MeanDurationFace1_200s  from Summary
+	select FaceID,Cov1, TimeStart2, TotalDurationFace1_200s , MeanDurationFace1_200s, FrequencyFace1_200s  from Summary
 	union
-	select FaceID,Cov2, TimeStart0, TotalDurationFace2_0s , MeanDurationFace2_0s  from Summary
+	select FaceID,Cov2, TimeStart0, TotalDurationFace2_0s , MeanDurationFace2_0s, FrequencyFace2_0s  from Summary
 	union
-	select FaceID,Cov2, TimeStart2, TotalDurationFace2_200s , MeanDurationFace2_200s  from Summary
+	select FaceID,Cov2, TimeStart2, TotalDurationFace2_200s , MeanDurationFace2_200s, FrequencyFace2_200s  from Summary
 ;
 quit;
 
@@ -389,6 +412,12 @@ proc sgplot data=Summary_box_plot;
   vbox MeanDuration / category=ConvTime group=GazeType groupdisplay=cluster;
   YAXIS LABEL = 'Total Duration (seconds)';
   run;
+  
+title 'Box Plot for Frequency of Face Gaze and Around Gaze in Conversation 1 and 2 (v1)';
+proc sgplot data=Summary_box_plot;
+  vbox Frequency / category=ConvTime group=GazeType groupdisplay=cluster;
+  YAXIS LABEL = 'Frequency';
+  run;  
 
 title 'Box Plot for Total Duration of Face Gaze and Around Gaze in Conversation 1 and 2 (v2)';
 proc sgplot data=Summary_box_plot;
@@ -402,3 +431,239 @@ proc sgplot data=Summary_box_plot;
   vbox MeanDuration / category=GazeType group=ConvTime groupdisplay=cluster;
   YAXIS LABEL = 'Total Duration (seconds)';
   run;
+  
+
+title 'Box Plot for Frequency of Face Gaze and Around Gaze in Conversation 1 and 2 (v2)';
+proc sgplot data=Summary_box_plot;
+  vbox Frequency / category=GazeType group=ConvTime groupdisplay=cluster;
+  YAXIS LABEL = 'Frequency';
+  run;  
+  
+
+/*--------------------------------------Draw histogram plot-------------------------------------------*/
+
+/*-------------------------------------Total Around------------------------------------*/
+title 'Histogram for Total Around Gaze of the 1st interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and Conversation in ("Con1");       /* restrict to two groups */
+	histogram TotalDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Around Gaze of the 2nd interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and Conversation in ("Con2");       /* restrict to two groups */
+	histogram TotalDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Around Gaze in the first 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and TimeStart in ("0s");       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Around Gaze in the last 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and TimeStart in ("200s");       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Around Gaze in the last 100s of the 1st interaction and the first 100s of the 2nd interaction with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and((TimeStart in ("200s") and Conversation in ("Con1"))
+								or (TimeStart in ("0s") and Conversation in ("Con2")));       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+
+/*-------------------------------------Total Face------------------------------------*/
+title 'Histogram for Total Face Gaze of the 1st interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and Conversation in ("Con1");       /* restrict to two groups */
+	histogram TotalDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Face Gaze of the 2nd interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and Conversation in ("Con2");       /* restrict to two groups */
+	histogram TotalDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Face Gaze in the first 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and TimeStart in ("0s");       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Face Gaze in the last 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and TimeStart in ("200s");       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Total Face Gaze in the last 100s of the 1st interaction and the first 100s of the 2nd interaction with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and((TimeStart in ("200s") and Conversation in ("Con1"))
+								or (TimeStart in ("0s") and Conversation in ("Con2")));       /* restrict to two groups */
+	histogram TotalDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density TotalDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+
+/*-------------------------------------Mean Around------------------------------------*/
+title 'Histogram for Mean Around Gaze of the 1st interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and Conversation in ("Con1");       /* restrict to two groups */
+	histogram MeanDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Around Gaze of the 2nd interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and Conversation in ("Con2");       /* restrict to two groups */
+	histogram MeanDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Around Gaze in the first 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and TimeStart in ("0s");       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Around Gaze in the last 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and TimeStart in ("200s");       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Around Gaze in the last 100s of the 1st interaction and the first 100s of the 2nd interaction with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and((TimeStart in ("200s") and Conversation in ("Con1"))
+								or (TimeStart in ("0s") and Conversation in ("Con2")));       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+
+/*-------------------------------------Mean Face------------------------------------*/
+title 'Histogram for Mean Face Gaze of the 1st interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and Conversation in ("Con1");       /* restrict to two groups */
+	histogram MeanDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Face Gaze of the 2nd interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and Conversation in ("Con2");       /* restrict to two groups */
+	histogram MeanDuration / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Face Gaze in the first 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and TimeStart in ("0s");       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Face Gaze in the last 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and TimeStart in ("200s");       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Mean Face Gaze in the last 100s of the 1st interaction and the first 100s of the 2nd interaction with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and((TimeStart in ("200s") and Conversation in ("Con1"))
+								or (TimeStart in ("0s") and Conversation in ("Con2")));       /* restrict to two groups */
+	histogram MeanDuration / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density MeanDuration / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+/*-------------------------------------Frequency Around------------------------------------*/
+title 'Histogram for Frequency Around Gaze of the 1st interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and Conversation in ("Con1");       /* restrict to two groups */
+	histogram Frequency / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Around Gaze of the 2nd interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and Conversation in ("Con2");       /* restrict to two groups */
+	histogram Frequency / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Around Gaze in the first 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and TimeStart in ("0s");       /* restrict to two groups */
+	histogram Frequency / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Around Gaze in the last 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and TimeStart in ("200s");       /* restrict to two groups */
+	histogram Frequency / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Around Gaze in the last 100s of the 1st interaction and the first 100s of the 2nd interaction with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Around") and((TimeStart in ("200s") and Conversation in ("Con1"))
+								or (TimeStart in ("0s") and Conversation in ("Con2")));       /* restrict to two groups */
+	histogram Frequency / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+
+/*-------------------------------------Frequency Face------------------------------------*/
+title 'Histogram for Frequency Face Gaze of the 1st interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and Conversation in ("Con1");       /* restrict to two groups */
+	histogram Frequency / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Face Gaze of the 2nd interaction between the first 100s and the last 100s with kernel fitting';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and Conversation in ("Con2");       /* restrict to two groups */
+	histogram Frequency / group=TimeStart transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=TimeStart;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Face Gaze in the first 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and TimeStart in ("0s");       /* restrict to two groups */
+	histogram Frequency / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Face Gaze in the last 100s with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and TimeStart in ("200s");       /* restrict to two groups */
+	histogram Frequency / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=Conversation;/* overlay density estimates */
+run;
+
+title 'Histogram for Frequency Face Gaze in the last 100s of the 1st interaction and the first 100s of the 2nd interaction with kernel fitting Conversation 1 and 2';
+proc sgplot data=Summary_box_plot;
+	where GazeType in ("Face") and((TimeStart in ("200s") and Conversation in ("Con1"))
+								or (TimeStart in ("0s") and Conversation in ("Con2")));       /* restrict to two groups */
+	histogram Frequency / group=Conversation transparency=0.5;       /* SAS 9.4m2 */
+	density Frequency / type= kernel group=Conversation;/* overlay density estimates */
+run;
