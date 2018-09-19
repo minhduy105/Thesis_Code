@@ -47,6 +47,10 @@ Around = 1
 Monitor = 2
 Keyboard = 3
 Face = 4
+Extra:
+No-Face = 5
+Com-time = 6
+Body = 7
 
 Talking: 
 No speaking = 1
@@ -54,4 +58,9 @@ Typing = 2
 Speaking = 3
 SSS = 4
 Hovering = 5
+Extra:
+Sound: 6
+No-Sound: 7
 
+For: DiscriptiveData_Sound_Gaze_5mins and DiscriptiveData_Sound_Gaze_100secs
+sound (3) or no sound (1) 
