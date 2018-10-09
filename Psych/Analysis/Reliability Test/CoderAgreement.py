@@ -87,5 +87,5 @@ def getReliability(inpath,Start,End,GoTSize):
 				time = np.arange(End).reshape([End,1])
 				output = np.c_[time,data]
 				np.savetxt(nameOutput + "_combined.csv", output, fmt='%1.3f',delimiter=',' )
-	return ori	
+	return ori
 

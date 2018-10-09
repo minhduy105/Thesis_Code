@@ -11,3 +11,6 @@ if __name__ == "__main__":
 	title = ["Dyad","Cov","Coder","Time","Gaze"]
 	name = "Output/Reliability_Data_Gaze_5min.csv"
 	AT.printResult(ori,title,name)
+
+# convert it into Panda
+# 
