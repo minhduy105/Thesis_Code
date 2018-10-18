@@ -70,10 +70,10 @@ def FindDiff(data_df, Char, Gaze):
 
     for i in Char:
         for k in Gaze:
-            a = i + k + "Log1_0s"
-            b = i + k + "Log1_200s"
-            c = i + k + "Log2_0s"
-            d = i + k + "Log2_200s"
+            a = i + k + "1_0s"
+            b = i + k + "1_200s"
+            c = i + k + "2_0s"
+            d = i + k + "2_200s"
 
             e = "Dif" + i + k + "_1S_1E"
             data_df[e] = np.absolute(data_df[a] - data_df[b])
@@ -116,7 +116,7 @@ def FindThreeLargest(data_df, Char, Gaze):
 
 
 if __name__ == "__main__":
-    data_df = pd.read_csv("Summary.csv")
+    data_df = pd.read_csv("SummaryGaze.csv")
     print (data_df)
     col_num = data_df.shape[1]
     normal_time = CalculateTimeForNormal(data_df)
@@ -131,6 +131,7 @@ if __name__ == "__main__":
 
     normal_time =  FindDiff(normal_time, Char, Gaze)
     log_time =  FindDiff(log_time, Char, Gaze)
+
 
     normal_time.to_csv("NormalTimeDiff.csv")
     log_time.to_csv("LogTimeDiff.csv")
